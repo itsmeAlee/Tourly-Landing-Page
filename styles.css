@@ -12,6 +12,19 @@
     box-sizing: border-box;
 }
 
+/* Disable square tap highlight on all interactive elements */
+button,
+a,
+input,
+[role="button"],
+.theme-toggle,
+.mobile-menu-toggle,
+.search-btn,
+.swiper-button-prev,
+.swiper-button-next {
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* ============================================
    CSS Variables - Light Mode (Default)
    ============================================ */
