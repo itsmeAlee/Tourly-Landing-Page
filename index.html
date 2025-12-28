@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourly - Discover Gilgit-Baltistan</title>
+    <meta name="description"
+        content="Your next adventure starts here. Discover tailored trips to Gilgit-Baltistan that fit your budget and style, with 24/7 support.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="/" class="logo">Tourly</a>
+
+            <nav class="nav">
+                <a href="#destinations" class="nav-link">Destinations</a>
+                <a href="#itineraries" class="nav-link">Itineraries</a>
+                <a href="#reviews" class="nav-link">Reviews</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <a href="#app" class="btn btn-primary">Get the App</a>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#destinations" class="nav-link">Destinations</a>
+            <a href="#itineraries" class="nav-link">Itineraries</a>
+            <a href="#reviews" class="nav-link">Reviews</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Your next adventure<br>starts right here</h1>
+            <p class="hero-subtitle">Discover tailored trips that fit your budget and style, with 24/7 support.</p>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Where do you want to go?">
+                <button class="search-btn" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section class="destinations" id="destinations">
+        <div class="container">
+            <h2 class="section-title">Popular Destinations</h2>
+
+            <!-- Cinematic Parallax Slider -->
+            <div class="slider-container">
+                <div class="swiper destination-slider">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1: Fairy Meadows -->
+                        <div class="swiper-slide">
+                            <div class="slide-image-wrapper">
+                                <img src="Enhanced Assets/Fairy-Meadows.png"
+                                    alt="Fairy Meadows - A paradise on earth with Nanga Parbat view" class="slide-image"
+                                    data-swiper-parallax="-300">
+                            </div>
+                            <div class="slide-content" data-swiper-parallax="-100">
+                                <h3 class="slide-title">Fairy Meadows</h3>
+                                <p class="slide-description">The base camp to Nanga Parbat, offering breathtaking alpine
+                                    scenery</p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: Khaplu Fort -->
+                        <div class="swiper-slide">
+                            <div class="slide-image-wrapper">
+                                <img src="Enhanced Assets/Khaplu-Fort.png"
+                                    alt="Historical Khaplu Fort illuminated at night" class="slide-image"
+                                    data-swiper-parallax="-300">
+                            </div>
+                            <div class="slide-content" data-swiper-parallax="-100">
+                                <h3 class="slide-title">Khaplu Fort</h3>
+                                <p class="slide-description">A 19th-century royal palace showcasing Balti architecture
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3: Skardu -->
+                        <div class="swiper-slide">
+                            <div class="slide-image-wrapper">
+                                <img src="Enhanced Assets/Skardu.png" alt="Scenic view of Skardu valley"
+                                    class="slide-image" data-swiper-parallax="-300">
+                            </div>
+                            <div class="slide-content" data-swiper-parallax="-100">
+                                <h3 class="slide-title">Skardu</h3>
+                                <p class="slide-description">Gateway to some of the world's highest peaks and crystal
+                                    lakes</p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4: Minimarg Astore -->
+                        <div class="swiper-slide">
+                            <div class="slide-image-wrapper">
+                                <img src="Enhanced Assets/Minimarg-Astore.png"
+                                    alt="Minimarg Astore - Pakistan's hidden paradise" class="slide-image"
+                                    data-swiper-parallax="-300">
+                            </div>
+                            <div class="slide-content" data-swiper-parallax="-100">
+                                <h3 class="slide-title">Minimarg, Astore</h3>
+                                <p class="slide-description">Pakistan's hidden paradise with lush green meadows</p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 5: Khaplu Valley -->
+                        <div class="swiper-slide">
+                            <div class="slide-image-wrapper">
+                                <img src="Enhanced Assets/Khaplu-Valley.png" alt="Beautiful Khaplu Valley landscape"
+                                    class="slide-image" data-swiper-parallax="-300">
+                            </div>
+                            <div class="slide-content" data-swiper-parallax="-100">
+                                <h3 class="slide-title">Khaplu Valley</h3>
+                                <p class="slide-description">A serene valley known for ancient monasteries and orchards
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 6: Skardu Panorama -->
+                        <div class="swiper-slide">
+                            <div class="slide-image-wrapper">
+                                <img src="Enhanced Assets/Skardu-Panorama.png"
+                                    alt="Panoramic view of Skardu, Gilgit-Baltistan" class="slide-image"
+                                    data-swiper-parallax="-300">
+                            </div>
+                            <div class="slide-content" data-swiper-parallax="-100">
+                                <h3 class="slide-title">Skardu Panorama</h3>
+                                <p class="slide-description">Where mountains meet the sky in perfect harmony</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Arrows -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+
+                    <!-- Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Tourly. Discover the beauty of Gilgit-Baltistan.</p>
+        </div>
+    </footer>
+
+    <!-- Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

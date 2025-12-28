@@ -1,0 +1,639 @@
+/* ============================================
+   TOURLY - Premium Tourism Landing Page
+   Design System with Light/Dark Mode
+   ============================================ */
+
+/* CSS Reset & Base */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================================
+   CSS Variables - Light Mode (Default)
+   ============================================ */
+:root {
+    /* Colors from theme.txt - Light Mode */
+    --background: oklch(0.97 0.02 225.66);
+    --foreground: oklch(0.15 0.02 269.18);
+    --card: oklch(0.98 0.01 228.79);
+    --card-foreground: oklch(0.15 0.02 269.18);
+    --primary: oklch(0.71 0.15 239.15);
+    --primary-foreground: oklch(0.94 0.03 232.39);
+    --secondary: oklch(0.91 0.03 229.20);
+    --secondary-foreground: oklch(0.15 0.02 269.18);
+    --muted: oklch(0.89 0.02 225.69);
+    --muted-foreground: oklch(0.36 0.03 231.55);
+    --accent: oklch(0.88 0.02 235.72);
+    --accent-foreground: oklch(0.34 0.05 229.20);
+    --border: oklch(0.82 0.02 240.77);
+    --input: oklch(0.82 0.02 240.77);
+    --ring: oklch(0.55 0.10 235.72);
+
+    /* Shadows - Light Mode */
+    --shadow-sm: 0px 1px 2.5px 0px oklch(0.49 0.09 235.00 / 0.06), 0px 1px 2px -1px oklch(0.49 0.09 235.00 / 0.06);
+    --shadow-md: 0px 1px 2.5px 0px oklch(0.49 0.09 235.00 / 0.06), 0px 2px 4px -1px oklch(0.49 0.09 235.00 / 0.06);
+    --shadow-lg: 0px 1px 2.5px 0px oklch(0.49 0.09 235.00 / 0.06), 0px 4px 6px -1px oklch(0.49 0.09 235.00 / 0.06);
+    --shadow-xl: 0px 1px 2.5px 0px oklch(0.49 0.09 235.00 / 0.06), 0px 8px 10px -1px oklch(0.49 0.09 235.00 / 0.06);
+
+    /* Typography */
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* Spacing */
+    --container-max: 1200px;
+    --container-padding: 1.5rem;
+
+    /* Border Radius */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 400ms ease;
+}
+
+/* ============================================
+   Dark Mode Variables
+   ============================================ */
+.dark {
+    --background: oklch(0.18 0.02 271.27);
+    --foreground: oklch(0.90 0.01 238.47);
+    --card: oklch(0.22 0.02 271.67);
+    --card-foreground: oklch(0.90 0.01 238.47);
+    --primary: oklch(0.71 0.15 239.15);
+    --primary-foreground: oklch(0.94 0.03 232.39);
+    --secondary: oklch(0.28 0.03 270.91);
+    --secondary-foreground: oklch(0.90 0.01 238.47);
+    --muted: oklch(0.28 0.03 270.91);
+    --muted-foreground: oklch(0.60 0.03 269.46);
+    --accent: oklch(0.28 0.03 270.91);
+    --accent-foreground: oklch(0.90 0.01 238.47);
+    --border: oklch(0.90 0.01 238.47 / 15%);
+    --input: oklch(0.90 0.01 238.47 / 20%);
+    --ring: oklch(0.66 0.13 227.70);
+
+    /* Shadows - Dark Mode */
+    --shadow-sm: 0px 1px 2px 0px oklch(0 0 0 / 0.15);
+    --shadow-md: 0px 2px 4px 0px oklch(0 0 0 / 0.2);
+    --shadow-lg: 0px 4px 8px 0px oklch(0 0 0 / 0.25);
+    --shadow-xl: 0px 8px 16px 0px oklch(0 0 0 / 0.3);
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.6;
+    transition: background-color var(--transition-base), color var(--transition-base);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* ============================================
+   Header & Navigation
+   ============================================ */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--background);
+    border-bottom: 1px solid var(--border);
+    transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--foreground);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    transition: color var(--transition-fast);
+}
+
+.logo:hover {
+    color: var(--primary);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: width var(--transition-base);
+}
+
+.nav-link:hover {
+    color: var(--foreground);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: var(--secondary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    color: var(--foreground);
+}
+
+.theme-toggle:hover {
+    background-color: var(--muted);
+    transform: scale(1.05);
+}
+
+.theme-toggle .icon-sun {
+    display: block;
+}
+
+.theme-toggle .icon-moon {
+    display: none;
+}
+
+.dark .theme-toggle .icon-sun {
+    display: none;
+}
+
+.dark .theme-toggle .icon-moon {
+    display: block;
+}
+
+/* Primary Button */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--foreground);
+    transition: all var(--transition-fast);
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    padding: 1rem var(--container-padding);
+    background-color: var(--background);
+    border-bottom: 1px solid var(--border);
+}
+
+.mobile-nav.active {
+    display: flex;
+}
+
+.mobile-nav .nav-link {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.mobile-nav .nav-link:last-child {
+    border-bottom: none;
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero {
+    padding: 4rem 0 2rem;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--foreground);
+    margin-bottom: 1.25rem;
+}
+
+.hero-subtitle {
+    font-size: 1.125rem;
+    color: var(--muted-foreground);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+}
+
+.search-bar:focus-within {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg), 0 0 0 3px oklch(0.71 0.15 239.15 / 0.15);
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--foreground);
+    outline: none;
+    font-family: inherit;
+}
+
+.search-input::placeholder {
+    color: var(--muted-foreground);
+}
+
+.search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.search-btn:hover {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
+/* ============================================
+   Destinations Section
+   ============================================ */
+.destinations {
+    padding: 1.5rem 0 4rem;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+}
+
+/* ============================================
+   Cinematic Parallax Slider
+   ============================================ */
+.slider-container {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+}
+
+.destination-slider {
+    width: 100%;
+    height: 500px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.swiper-slide {
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-image-wrapper {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), filter 0.4s ease;
+}
+
+/* Hover Effect: Subtle brightness increase, NO scale change */
+.swiper-slide:hover .slide-image {
+    filter: brightness(1.1);
+}
+
+/* Ken Burns Effect - Subtle Zoom Animation */
+@keyframes kenBurns {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.08);
+    }
+}
+
+.swiper-slide-active .slide-image {
+    animation: kenBurns 8s ease-out forwards;
+}
+
+/* Slide Content Overlay */
+.slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 3rem 2.5rem;
+    background: linear-gradient(to top,
+            oklch(0 0 0 / 0.7) 0%,
+            oklch(0 0 0 / 0.4) 50%,
+            oklch(0 0 0 / 0) 100%);
+    color: white;
+    z-index: 10;
+}
+
+.slide-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 10px oklch(0 0 0 / 0.3);
+}
+
+.slide-description {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 500px;
+    text-shadow: 0 1px 5px oklch(0 0 0 / 0.3);
+}
+
+/* Swiper Navigation Arrows */
+.swiper-button-prev,
+.swiper-button-next {
+    width: 40px;
+    height: 40px;
+    background-color: oklch(1 0 0 / 0.9);
+    border-radius: 50%;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-fast);
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 1rem;
+    font-weight: 700;
+    color: black;
+    /* Force dark color for visibility against white bg */
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background-color: oklch(0.95 0.01 238.47);
+}
+
+.swiper-button-prev {
+    left: 1.5rem;
+}
+
+.swiper-button-next {
+    right: 1.5rem;
+}
+
+/* Swiper Pagination */
+.swiper-pagination {
+    bottom: 1.5rem !important;
+}
+
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: oklch(1 0 0 / 0.5);
+    opacity: 1;
+    transition: all var(--transition-fast);
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--primary);
+    width: 30px;
+    border-radius: var(--radius-full);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .btn-primary {
+        display: none;
+    }
+
+    .header-container {
+        height: 60px;
+    }
+
+    .hero {
+        padding: 3rem 0;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .search-bar {
+        max-width: 100%;
+    }
+
+    .destination-slider {
+        height: 400px;
+    }
+
+    .slide-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .slide-title {
+        font-size: 1.5rem;
+    }
+
+    .slide-description {
+        font-size: 0.875rem;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 0.875rem;
+    }
+
+    .swiper-button-prev {
+        left: 1rem;
+    }
+
+    .swiper-button-next {
+        right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .destination-slider {
+        height: 350px;
+    }
+
+    .slide-title {
+        font-size: 1.25rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* ============================================
+   Smooth Theme Transition
+   ============================================ */
+body,
+.header,
+.search-bar,
+.theme-toggle,
+.footer {
+    transition:
+        background-color var(--transition-base),
+        border-color var(--transition-base),
+        color var(--transition-base);
+}
