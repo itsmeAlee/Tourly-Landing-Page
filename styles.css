@@ -204,8 +204,10 @@ body {
     background-color: var(--secondary);
     border-radius: var(--radius-md);
     cursor: pointer;
-    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    transition: background-color var(--transition-fast);
     color: var(--foreground);
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .theme-toggle:hover {
@@ -276,6 +278,8 @@ body {
     border: none;
     cursor: pointer;
     gap: 5px;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-menu-toggle span {
@@ -413,6 +417,25 @@ body {
 /* Hide placeholder when input has content or focused */
 .search-bar:focus-within .search-placeholder {
     opacity: 0;
+}
+
+/* Mobile Sliding Animation - Contained within masked window */
+@keyframes slideTextContained {
+
+    0%,
+    20% {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    40%,
+    60% {
+        transform: translateY(-50%) translateX(-40%);
+    }
+
+    80%,
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
 }
 
 /* Search Button - Absolutely anchored with high z-index */
@@ -666,6 +689,18 @@ body {
         height: 40px;
         padding-left: 0.75rem;
         padding-right: 0.25rem;
+        overflow: hidden;
+        /* Fade edges for smooth text clipping */
+        -webkit-mask-image: linear-gradient(to right,
+                transparent 0%,
+                black 5%,
+                black 85%,
+                transparent 100%);
+        mask-image: linear-gradient(to right,
+                transparent 0%,
+                black 5%,
+                black 85%,
+                transparent 100%);
     }
 
     .search-input {
@@ -681,12 +716,9 @@ body {
 
     .search-placeholder {
         left: 0.75rem;
-        font-size: clamp(0.6875rem, 3.5vw, 0.8125rem);
-        /* Scales down on very small screens */
+        font-size: 0.8125rem;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: calc(100% - 1rem);
+        animation: slideTextContained 6s ease-in-out infinite;
     }
 
     .destination-slider {
