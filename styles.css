@@ -326,6 +326,8 @@ body {
 .search-bar {
     display: flex;
     align-items: center;
+    position: relative;
+    width: 100%;
     max-width: 500px;
     margin: 0 auto;
     background-color: var(--card);
@@ -343,12 +345,16 @@ body {
 
 .search-input {
     flex: 1;
+    min-width: 0;
+    /* Allows proper shrinking in flex container */
     border: none;
     background: transparent;
     font-size: 1rem;
     color: var(--foreground);
     outline: none;
     font-family: inherit;
+    padding-right: 0.5rem;
+    /* Prevent text overlap with button */
 }
 
 .search-input::placeholder {
@@ -361,6 +367,9 @@ body {
     justify-content: center;
     width: 44px;
     height: 44px;
+    min-width: 44px;
+    /* Prevent button shrinking */
+    min-height: 44px;
     border: none;
     background-color: var(--primary);
     color: white;
@@ -368,6 +377,8 @@ body {
     cursor: pointer;
     transition: all var(--transition-fast);
     flex-shrink: 0;
+    aspect-ratio: 1 / 1;
+    /* Force perfect circle */
 }
 
 .search-btn:hover {
@@ -571,7 +582,20 @@ body {
     }
 
     .search-bar {
-        max-width: 100%;
+        width: 90%;
+        max-width: 400px;
+        padding: 0.375rem 0.375rem 0.375rem 1rem;
+    }
+
+    .search-input {
+        font-size: 0.9375rem;
+    }
+
+    .search-btn {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
     }
 
     .destination-slider {
