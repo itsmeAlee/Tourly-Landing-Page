@@ -12,7 +12,7 @@ const htmlElement = document.documentElement;
 // Check for saved theme preference or system preference
 function initializeTheme() {
     const savedTheme = localStorage.getItem('tourly-theme');
-    
+
     if (savedTheme) {
         htmlElement.classList.toggle('dark', savedTheme === 'dark');
     } else {
@@ -54,7 +54,29 @@ if (mobileMenuToggle && mobileNav) {
         mobileMenuToggle.classList.toggle('active');
         mobileNav.classList.toggle('active');
     });
-    
+
+    // Search Placeholder Visibility
+    const searchInput = document.querySelector('.search-input');
+    const searchPlaceholder = document.querySelector('.search-placeholder');
+
+    if (searchInput && searchPlaceholder) {
+        // Hide placeholder when typing, show when empty
+        searchInput.addEventListener('input', () => {
+            searchPlaceholder.style.opacity = searchInput.value ? '0' : '1';
+        });
+
+        // Hide placeholder on focus
+        searchInput.addEventListener('focus', () => {
+            searchPlaceholder.style.opacity = '0';
+        });
+
+        // Show placeholder on blur if empty
+        searchInput.addEventListener('blur', () => {
+            if (!searchInput.value) {
+                searchPlaceholder.style.opacity = '1';
+            }
+        });
+    }
     // Close mobile menu when clicking a link
     const mobileNavLinks = mobileNav.querySelectorAll('.nav-link');
     mobileNavLinks.forEach(link => {
@@ -73,46 +95,46 @@ const destinationSlider = new Swiper('.destination-slider', {
     slidesPerView: 1,
     spaceBetween: 0,
     loop: true,
-    
+
     // Parallax effect for depth
     parallax: true,
-    
+
     // Smooth, weighty transition
     speed: 800,
     effect: 'slide',
-    
+
     // Easing for cinematic feel
     cssMode: false,
-    
+
     // Autoplay (optional - creates immersive experience)
     autoplay: {
         delay: 6000,
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
     },
-    
+
     // Navigation arrows
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
     },
-    
+
     // Pagination dots
     pagination: {
         el: '.swiper-pagination',
         clickable: true,
         dynamicBullets: true,
     },
-    
+
     // Keyboard navigation
     keyboard: {
         enabled: true,
         onlyInViewport: true,
     },
-    
+
     // Touch/swipe gestures
     grabCursor: true,
-    
+
     // Responsive breakpoints
     breakpoints: {
         320: {
@@ -122,10 +144,10 @@ const destinationSlider = new Swiper('.destination-slider', {
             speed: 800,
         },
     },
-    
+
     // Event handlers for Ken Burns effect
     on: {
-        init: function() {
+        init: function () {
             // Ensure first slide has the animation
             const activeSlide = this.slides[this.activeIndex];
             if (activeSlide) {
@@ -135,7 +157,7 @@ const destinationSlider = new Swiper('.destination-slider', {
                 }
             }
         },
-        slideChangeTransitionStart: function() {
+        slideChangeTransitionStart: function () {
             // Reset animation on all slides
             this.slides.forEach(slide => {
                 const img = slide.querySelector('.slide-image');
@@ -144,7 +166,7 @@ const destinationSlider = new Swiper('.destination-slider', {
                 }
             });
         },
-        slideChangeTransitionEnd: function() {
+        slideChangeTransitionEnd: function () {
             // Apply Ken Burns to active slide
             const activeSlide = this.slides[this.activeIndex];
             if (activeSlide) {
@@ -163,7 +185,7 @@ const destinationSlider = new Swiper('.destination-slider', {
 // Smooth Scroll Enhancement
 // ============================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
@@ -192,7 +214,7 @@ if (searchBtn && searchInput) {
             searchInput.focus();
         }
     });
-    
+
     // Search on Enter key
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
