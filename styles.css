@@ -197,7 +197,12 @@ body {
 
 .theme-toggle:hover {
     background-color: var(--muted);
-    transform: scale(1.05);
+    opacity: 0.85;
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .theme-toggle .icon-sun {
@@ -238,8 +243,12 @@ body {
 
 .btn-primary:hover {
     filter: brightness(1.1);
-    transform: translateY(-1px);
     box-shadow: var(--shadow-md);
+}
+
+.btn-primary:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 /* Mobile Menu Toggle */
@@ -393,25 +402,6 @@ body {
     opacity: 0;
 }
 
-/* Mobile Sliding Animation - Contained within window */
-@keyframes slideTextMasked {
-
-    0%,
-    15% {
-        transform: translateY(-50%) translateX(0);
-    }
-
-    35%,
-    65% {
-        transform: translateY(-50%) translateX(calc(-100% + 180px));
-    }
-
-    85%,
-    100% {
-        transform: translateY(-50%) translateX(0);
-    }
-}
-
 /* Search Button - Absolutely anchored with high z-index */
 .search-btn {
     display: flex;
@@ -426,20 +416,28 @@ body {
     color: white;
     border-radius: 50%;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
     flex-shrink: 0;
     aspect-ratio: 1 / 1;
     z-index: 10;
-    /* Above sliding text */
     position: relative;
-}
-
-/* Force perfect circle */
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .search-btn:hover {
-    filter: brightness(1.1);
-    transform: scale(1.05);
+    background-color: oklch(0.65 0.15 239.15);
+    /* Slightly darker teal */
+    box-shadow: 0 2px 8px oklch(0 0 0 / 0.15);
+}
+
+.search-btn:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+.search-btn:active {
+    background-color: oklch(0.60 0.15 239.15);
 }
 
 /* ============================================
@@ -550,7 +548,9 @@ body {
     background-color: oklch(1 0 0 / 0.9);
     border-radius: 50%;
     box-shadow: var(--shadow-md);
-    transition: all var(--transition-fast);
+    transition: background-color var(--transition-fast), opacity var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .swiper-button-prev::after,
@@ -558,12 +558,18 @@ body {
     font-size: 1rem;
     font-weight: 700;
     color: black;
-    /* Force dark color for visibility against white bg */
 }
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
     background-color: oklch(0.95 0.01 238.47);
+    opacity: 0.9;
+}
+
+.swiper-button-prev:focus-visible,
+.swiper-button-next:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .swiper-button-prev {
@@ -647,21 +653,10 @@ body {
         height: 40px;
         padding-left: 0.75rem;
         padding-right: 0.25rem;
-        /* Fade edges for smooth text clipping */
-        -webkit-mask-image: linear-gradient(to right,
-                transparent 0%,
-                black 8%,
-                black 92%,
-                transparent 100%);
-        mask-image: linear-gradient(to right,
-                transparent 0%,
-                black 8%,
-                black 92%,
-                transparent 100%);
     }
 
     .search-input {
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
     }
 
     .search-btn {
@@ -673,8 +668,12 @@ body {
 
     .search-placeholder {
         left: 0.75rem;
-        font-size: 0.8125rem;
-        animation: slideTextMasked 6s ease-in-out infinite;
+        font-size: clamp(0.6875rem, 3.5vw, 0.8125rem);
+        /* Scales down on very small screens */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(100% - 1rem);
     }
 
     .destination-slider {
