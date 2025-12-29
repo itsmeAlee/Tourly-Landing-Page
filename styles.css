@@ -1,6 +1,6 @@
 /* ============================================
    TOURLY - Premium Tourism Landing Page
-   Design System with Light/Dark Mode
+   Design System: Dimensional 2D (Borderless & Tactile)
    ============================================ */
 
 /* CSS Reset & Base */
@@ -12,7 +12,7 @@
     box-sizing: border-box;
 }
 
-/* Disable square tap highlight on all interactive elements */
+/* Disable square tap highlight */
 button,
 a,
 input,
@@ -29,28 +29,67 @@ input,
    CSS Variables - Light Mode (Default)
    ============================================ */
 :root {
-    /* Colors from theme.txt - Light Mode */
-    --background: oklch(0.97 0.02 225.66);
+    /* Base Colors (OKLCH) */
+    --background: oklch(0.98 0.01 225.66);
     --foreground: oklch(0.15 0.02 269.18);
-    --card: oklch(0.98 0.01 228.79);
+    --card: oklch(0.99 0.005 228.79);
     --card-foreground: oklch(0.15 0.02 269.18);
-    --primary: oklch(0.71 0.15 239.15);
-    --primary-foreground: oklch(0.94 0.03 232.39);
-    --secondary: oklch(0.91 0.03 229.20);
-    --secondary-foreground: oklch(0.15 0.02 269.18);
-    --muted: oklch(0.89 0.02 225.69);
-    --muted-foreground: oklch(0.36 0.03 231.55);
-    --accent: oklch(0.88 0.02 235.72);
-    --accent-foreground: oklch(0.34 0.05 229.20);
-    --border: oklch(0.82 0.02 240.77);
-    --input: oklch(0.82 0.02 240.77);
-    --ring: oklch(0.55 0.10 235.72);
 
-    /* Shadows - Light Mode */
-    --shadow-sm: 0px 1px 2.5px 0px oklch(0.49 0.09 235.00 / 0.06), 0px 1px 2px -1px oklch(0.49 0.09 235.00 / 0.06);
-    --shadow-md: 0px 1px 2.5px 0px oklch(0.49 0.09 235.00 / 0.06), 0px 2px 4px -1px oklch(0.49 0.09 235.00 / 0.06);
-    --shadow-lg: 0px 1px 2.5px 0px oklch(0.49 0.09 235.00 / 0.06), 0px 4px 6px -1px oklch(0.49 0.09 235.00 / 0.06);
-    --shadow-xl: 0px 1px 2.5px 0px oklch(0.49 0.09 235.00 / 0.06), 0px 8px 10px -1px oklch(0.49 0.09 235.00 / 0.06);
+    /* Brand Colors */
+    --primary: oklch(0.71 0.15 239.15);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.94 0.02 229.20);
+    --secondary-foreground: oklch(0.15 0.02 269.18);
+    --muted: oklch(0.92 0.02 225.69);
+    --muted-foreground: oklch(0.40 0.03 231.55);
+    --accent: oklch(0.92 0.02 235.72);
+    --accent-foreground: oklch(0.25 0.05 229.20);
+    --input: oklch(0.88 0.02 240.77);
+    --ring: oklch(0.71 0.15 239.15);
+
+    /* 
+       DIMENSIONAL SYSTEM 2.0 (Light Mode) 
+       Concept: No Borders, Pure Depth (Shadows & Lights)
+    */
+
+    /* Technique: Double Shadow (Definition + Elevation) */
+    /* Sharp shadow defines the edge, Soft shadow gives height */
+
+    /* Low Elevation (Cards/Elements) */
+    --shadow-floating-sm:
+        0 1px 2px 0 oklch(0 0 0 / 0.1),
+        /* Sharp Edge */
+        0 4px 8px -2px oklch(0 0 0 / 0.05);
+    /* Soft Ambient */
+
+    /* Medium Elevation (Search Bar/Sticky Header) */
+    --shadow-floating-md:
+        0 1px 3px 0 oklch(0 0 0 / 0.1),
+        0 8px 16px -4px oklch(0 0 0 / 0.06);
+
+    /* High Elevation (Modals/Sliders) */
+    --shadow-floating-lg:
+        0 1px 3px 0 oklch(0 0 0 / 0.1),
+        0 12px 24px -6px oklch(0 0 0 / 0.08);
+
+    /* TACTILE BUTTON SYSTEM */
+    /* Top Bevel: Simulates light hitting the top edge (Inset Shadow) */
+    /* Side Shadow: Simulates the physical thickness of the button (Bottom Offset) */
+    /* Drop Shadow: Simulates the button sitting on the page */
+
+    --btn-bevel: inset 0 1.5px 0 0 oklch(1 1 1 / 0.6);
+    --btn-thickness: 0 2px 0 0 oklch(0 0 0 / 0.12);
+    /* The "Side" */
+    --btn-drop: 0 4px 6px -1px oklch(0 0 0 / 0.1);
+
+    --shadow-tactile: var(--btn-bevel), var(--btn-thickness), var(--btn-drop);
+
+    /* Recessed Inputs (Search Bar) */
+    --shadow-recessed:
+        inset 0 2px 4px 0 oklch(0 0 0 / 0.05),
+        /* Inner Shadow */
+        0 1px 0 0 oklch(1 1 1 / 1);
+    /* Bottom Lip Highlight */
 
     /* Typography */
     --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -67,9 +106,9 @@ input,
     --radius-full: 9999px;
 
     /* Transitions */
-    --transition-fast: 150ms ease;
-    --transition-base: 250ms ease;
-    --transition-slow: 400ms ease;
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ============================================
@@ -77,26 +116,93 @@ input,
    ============================================ */
 .dark {
     --background: oklch(0.18 0.02 271.27);
-    --foreground: oklch(0.90 0.01 238.47);
-    --card: oklch(0.22 0.02 271.67);
-    --card-foreground: oklch(0.90 0.01 238.47);
+    --foreground: oklch(0.92 0.01 238.47);
+    --card: oklch(0.23 0.02 271.67);
+    --card-foreground: oklch(0.92 0.01 238.47);
     --primary: oklch(0.71 0.15 239.15);
-    --primary-foreground: oklch(0.94 0.03 232.39);
-    --secondary: oklch(0.28 0.03 270.91);
-    --secondary-foreground: oklch(0.90 0.01 238.47);
-    --muted: oklch(0.28 0.03 270.91);
-    --muted-foreground: oklch(0.60 0.03 269.46);
-    --accent: oklch(0.28 0.03 270.91);
-    --accent-foreground: oklch(0.90 0.01 238.47);
-    --border: oklch(0.90 0.01 238.47 / 15%);
-    --input: oklch(0.90 0.01 238.47 / 20%);
+    --primary-foreground: oklch(1 1 1);
+    --secondary: oklch(0.30 0.03 270.91);
+    --secondary-foreground: oklch(0.92 0.01 238.47);
+    --muted: oklch(0.25 0.03 270.91);
+    --muted-foreground: oklch(0.65 0.03 269.46);
+    --accent: oklch(0.30 0.03 270.91);
+    --accent-foreground: oklch(0.92 0.01 238.47);
+    --input: oklch(0.92 0.01 238.47 / 0.15);
     --ring: oklch(0.66 0.13 227.70);
 
-    /* Shadows - Dark Mode */
-    --shadow-sm: 0px 1px 2px 0px oklch(0 0 0 / 0.15);
-    --shadow-md: 0px 2px 4px 0px oklch(0 0 0 / 0.2);
-    --shadow-lg: 0px 4px 8px 0px oklch(0 0 0 / 0.25);
-    --shadow-xl: 0px 8px 16px 0px oklch(0 0 0 / 0.3);
+    /* Dimensional System (Dark Mode) */
+    /* Deeper, starker shadows to define edges in low light */
+
+    --shadow-floating-sm:
+        0 1px 2px 0 oklch(0 0 0 / 0.5),
+        0 4px 8px -2px oklch(0 0 0 / 0.3);
+
+    --shadow-floating-md:
+        0 1px 3px 0 oklch(0 0 0 / 0.6),
+        0 8px 16px -4px oklch(0 0 0 / 0.4);
+
+    --shadow-floating-lg:
+        0 1px 3px 0 oklch(0 0 0 / 0.7),
+        0 12px 24px -6px oklch(0 0 0 / 0.5);
+
+    /* Tactile Buttons Dark */
+    --btn-bevel: inset 0 1px 0 0 oklch(1 1 1 / 0.15);
+    /* Subtle rim light */
+    --btn-thickness: 0 2px 0 0 oklch(0 0 0 / 0.5);
+    /* Dark side */
+    --btn-drop: 0 4px 8px -1px oklch(0 0 0 / 0.5);
+
+    --shadow-tactile: var(--btn-bevel), var(--btn-thickness), var(--btn-drop);
+
+    /* Recessed Inputs Dark */
+    --shadow-recessed:
+        inset 0 2px 4px 0 oklch(0 0 0 / 0.5),
+        0 1px 0 0 oklch(1 1 1 / 0.08);
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+/* Gloss Shimmer Animation - Moving Light */
+@keyframes gloss-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Ken Burns Effect */
+@keyframes kenBurns {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.08);
+    }
+}
+
+/* Mobile Slide */
+@keyframes slideTextContained {
+
+    0%,
+    20% {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    40%,
+    60% {
+        transform: translateY(-50%) translateX(-40%);
+    }
+
+    80%,
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
 }
 
 /* ============================================
@@ -129,8 +235,10 @@ body {
     top: 0;
     z-index: 100;
     background-color: var(--background);
-    border-bottom: 1px solid var(--border);
-    transition: background-color var(--transition-base), border-color var(--transition-base);
+    /* No Border - Separation by Float */
+    border: none;
+    box-shadow: var(--shadow-floating-md);
+    transition: all var(--transition-base);
 }
 
 .header-container {
@@ -147,6 +255,7 @@ body {
     text-decoration: none;
     letter-spacing: -0.02em;
     transition: color var(--transition-fast);
+    text-shadow: 0 1px 2px oklch(0 0 0 / 0.1);
 }
 
 .logo:hover {
@@ -193,31 +302,50 @@ body {
     gap: 1rem;
 }
 
-/* Theme Toggle Button */
+/* Theme Toggle Button (Tactile) */
 .theme-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
     height: 40px;
-    border: none;
     background-color: var(--secondary);
     border-radius: var(--radius-md);
     cursor: pointer;
-    transition: background-color var(--transition-fast);
     color: var(--foreground);
     outline: none;
-    -webkit-tap-highlight-color: transparent;
+
+    /* NO BORDER */
+    border: none;
+
+    /* Tactile Attributes */
+    box-shadow: var(--shadow-tactile);
+    transition: all var(--transition-fast);
+    transform: translateY(0);
 }
 
 .theme-toggle:hover {
-    background-color: var(--muted);
-    opacity: 0.85;
+    filter: brightness(1.05);
+    background-color: var(--card);
+    /* Slight color shift */
+}
+
+.theme-toggle:active {
+    /* Press Effect */
+    transform: translateY(2px);
+
+    /* Collapse the "Thickness" shadow */
+    box-shadow:
+        var(--btn-bevel),
+        0 0 0 0 oklch(0 0 0 / 0),
+        /* Thickness gone */
+        0 1px 2px 0 oklch(0 0 0 / 0.1);
+    /* Drop reduced */
 }
 
 .theme-toggle:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
+    /* Focus relies on ring, no border */
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
 }
 
 .theme-toggle .icon-sun {
@@ -236,7 +364,7 @@ body {
     display: block;
 }
 
-/* Primary Button */
+/* Primary Button (Tactile + Shimmer) */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -247,23 +375,73 @@ body {
     text-decoration: none;
     border-radius: var(--radius-md);
     cursor: pointer;
-    transition: all var(--transition-fast);
+
+    /* NO BORDER */
     border: none;
+
+    /* Tactile Attributes */
+    box-shadow: var(--shadow-tactile);
+    transition: all var(--transition-fast);
+    position: relative;
+    transform: translateY(0);
 }
 
 .btn-primary {
     background-color: var(--primary);
     color: white;
+    /* Masking for shimmer */
+    overflow: hidden;
+}
+
+/* The Gloss Shimmer */
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Soft White Gradient */
+    background: linear-gradient(105deg,
+            transparent 40%,
+            oklch(1 0 0 / 0.2) 50%,
+            transparent 60%);
+    background-size: 200% 100%;
+    animation: gloss-shimmer 4s infinite linear;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    /* Blends nicely on both light/dark */
 }
 
 .btn-primary:hover {
     filter: brightness(1.1);
-    box-shadow: var(--shadow-md);
+    /* Slight Lift */
+    transform: translateY(-1px);
+    box-shadow:
+        var(--btn-bevel),
+        0 3px 0 0 oklch(0 0 0 / 0.15),
+        /* Thicker side */
+        0 8px 12px -2px oklch(0 0 0 / 0.15);
+    /* Higher drop */
+}
+
+.btn-primary:active {
+    /* Press Effect (2px) */
+    transform: translateY(2px);
+
+    /* Shadow Collapse */
+    box-shadow:
+        inset 0 2px 4px 0 oklch(0 0 0 / 0.1),
+        /* Inner shadow for depth when pressed */
+        0 0 0 0 oklch(0 0 0 / 0),
+        /* Thickness gone */
+        0 1px 1px 0 oklch(0 0 0 / 0.1);
+    /* Minimal drop */
 }
 
 .btn-primary:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+    outline: none;
 }
 
 /* Mobile Menu Toggle */
@@ -279,7 +457,6 @@ body {
     cursor: pointer;
     gap: 5px;
     outline: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-menu-toggle span {
@@ -288,6 +465,7 @@ body {
     height: 2px;
     background-color: var(--foreground);
     transition: all var(--transition-fast);
+    box-shadow: 0 1px 1px oklch(0 0 0 / 0.1);
 }
 
 .mobile-menu-toggle.active span:nth-child(1) {
@@ -308,7 +486,8 @@ body {
     flex-direction: column;
     padding: 1rem var(--container-padding);
     background-color: var(--background);
-    border-bottom: 1px solid var(--border);
+    border: none;
+    box-shadow: var(--shadow-floating-lg);
 }
 
 .mobile-nav.active {
@@ -318,6 +497,7 @@ body {
 .mobile-nav .nav-link {
     padding: 0.75rem 0;
     border-bottom: 1px solid var(--border);
+    /* kept internal separator */
 }
 
 .mobile-nav .nav-link:last-child {
@@ -339,6 +519,8 @@ body {
     letter-spacing: -0.03em;
     color: var(--foreground);
     margin-bottom: 1.25rem;
+    text-shadow: 0 2px 4px oklch(0 0 0 / 0.05);
+    /* Text dimension */
 }
 
 .hero-subtitle {
@@ -348,7 +530,7 @@ body {
     margin: 0 auto 2.5rem;
 }
 
-/* Search Bar */
+/* Search Bar (Recessed + Shimmer + No Border) */
 .search-bar {
     display: flex;
     align-items: center;
@@ -357,19 +539,46 @@ body {
     max-width: 500px;
     margin: 0 auto;
     background-color: var(--card);
-    border: 1px solid var(--border);
     border-radius: var(--radius-full);
     padding: 0.5rem;
-    box-shadow: var(--shadow-md);
+    overflow: hidden;
+
+    /* NO BORDER */
+    border: none;
+
+    /* Recessed Effect defined by shadow */
+    box-shadow: var(--shadow-recessed);
     transition: all var(--transition-base);
 }
 
-.search-bar:focus-within {
-    border-color: var(--primary);
-    box-shadow: var(--shadow-lg), 0 0 0 3px oklch(0.71 0.15 239.15 / 0.15);
+/* Shimmer for Search Bar */
+.search-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(105deg,
+            transparent 40%,
+            oklch(1 0 0 / 0.2) 50%,
+            /* White gloss */
+            transparent 60%);
+    background-size: 200% 100%;
+    animation: gloss-shimmer 6s infinite ease-in-out;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    z-index: 5;
 }
 
-/* Slide Window - The masked container for text */
+.search-bar:focus-within {
+    box-shadow:
+        var(--shadow-recessed),
+        0 0 0 3px oklch(0.71 0.15 239.15 / 0.2);
+    /* Focus ring via shadow */
+}
+
+/* Slide Window */
 .search-slide-window {
     flex: 1;
     position: relative;
@@ -379,6 +588,7 @@ body {
     align-items: center;
     padding-left: 1rem;
     padding-right: 0.5rem;
+    z-index: 6;
 }
 
 .search-input {
@@ -391,15 +601,13 @@ body {
     outline: none;
     font-family: inherit;
     position: relative;
-    z-index: 2;
+    z-index: 7;
 }
 
 .search-input::placeholder {
     color: transparent;
-    /* Hide native placeholder, using custom one */
 }
 
-/* Custom Animated Placeholder */
 .search-placeholder {
     position: absolute;
     left: 1rem;
@@ -410,35 +618,15 @@ body {
     font-family: inherit;
     pointer-events: none;
     white-space: nowrap;
-    z-index: 1;
+    z-index: 6;
     transition: opacity var(--transition-fast);
 }
 
-/* Hide placeholder when input has content or focused */
 .search-bar:focus-within .search-placeholder {
     opacity: 0;
 }
 
-/* Mobile Sliding Animation - Contained within masked window */
-@keyframes slideTextContained {
-
-    0%,
-    20% {
-        transform: translateY(-50%) translateX(0);
-    }
-
-    40%,
-    60% {
-        transform: translateY(-50%) translateX(-40%);
-    }
-
-    80%,
-    100% {
-        transform: translateY(-50%) translateX(0);
-    }
-}
-
-/* Search Button - Absolutely anchored with high z-index */
+/* Search Button (Tactile + Shimmer + No Border) */
 .search-btn {
     display: flex;
     align-items: center;
@@ -447,33 +635,66 @@ body {
     height: 44px;
     min-width: 44px;
     min-height: 44px;
-    border: none;
     background-color: var(--primary);
     color: white;
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
     flex-shrink: 0;
-    aspect-ratio: 1 / 1;
     z-index: 10;
     position: relative;
-    -webkit-tap-highlight-color: transparent;
     outline: none;
+    overflow: hidden;
+
+    /* NO BORDER */
+    border: none;
+
+    /* Tactile Attributes */
+    box-shadow: var(--shadow-tactile);
+    transition: all var(--transition-fast);
+    transform: translateY(0);
+}
+
+/* Shimmer for Search Button */
+.search-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(105deg,
+            transparent 40%,
+            oklch(1 0 0 / 0.2) 50%,
+            transparent 60%);
+    background-size: 200% 100%;
+    animation: gloss-shimmer 4s infinite linear;
+    pointer-events: none;
+    mix-blend-mode: overlay;
 }
 
 .search-btn:hover {
     background-color: oklch(0.65 0.15 239.15);
-    /* Slightly darker teal */
-    box-shadow: 0 2px 8px oklch(0 0 0 / 0.15);
-}
-
-.search-btn:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 2px;
+    /* Lift */
+    transform: translateY(-1px);
+    box-shadow:
+        var(--btn-bevel),
+        0 3px 0 0 oklch(0 0 0 / 0.15),
+        0 8px 12px -2px oklch(0 0 0 / 0.15);
 }
 
 .search-btn:active {
+    /* Press 2px */
+    transform: translateY(2px);
     background-color: oklch(0.60 0.15 239.15);
+    /* Shadow Collapse */
+    box-shadow:
+        inset 0 2px 4px 0 oklch(0 0 0 / 0.1),
+        0 0 0 0 oklch(0 0 0 / 0),
+        0 1px 1px 0 oklch(0 0 0 / 0.1);
+}
+
+.search-btn:focus-visible {
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
 }
 
 /* ============================================
@@ -491,14 +712,40 @@ body {
     letter-spacing: -0.02em;
 }
 
-/* ============================================
-   Cinematic Parallax Slider
-   ============================================ */
+/* Cinematic Parallax Slider (Double Shadow Container) */
 .slider-container {
     position: relative;
     border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: var(--shadow-xl);
+
+    /* NO BORDER */
+    border: none;
+
+    /* Double Shadow Floating Effect */
+    box-shadow: var(--shadow-floating-lg);
+    background-color: var(--card);
+    /* Ensure no transparency leak */
+}
+
+/* Shimmer for Slider */
+.slider-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(105deg,
+            transparent 40%,
+            oklch(1 0 0 / 0.1) 50%,
+            /* Subtler on large area */
+            transparent 60%);
+    background-size: 200% 100%;
+    animation: gloss-shimmer 8s infinite ease-in-out;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: 20;
+    border-radius: var(--radius-xl);
 }
 
 .destination-slider {
@@ -506,6 +753,12 @@ body {
     height: 500px;
     border-radius: var(--radius-xl);
     overflow: hidden;
+    position: relative;
+    /* Clean cut for image */
+    mask-image: linear-gradient(black, black);
+    -webkit-mask-image: linear-gradient(black, black);
+    border-radius: var(--radius-xl);
+    /* Enforce Clip */
 }
 
 .swiper-slide {
@@ -527,20 +780,8 @@ body {
     transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), filter 0.4s ease;
 }
 
-/* Hover Effect: Subtle brightness increase, NO scale change */
 .swiper-slide:hover .slide-image {
     filter: brightness(1.1);
-}
-
-/* Ken Burns Effect - Subtle Zoom Animation */
-@keyframes kenBurns {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.08);
-    }
 }
 
 .swiper-slide-active .slide-image {
@@ -555,8 +796,8 @@ body {
     right: 0;
     padding: 3rem 2.5rem;
     background: linear-gradient(to top,
-            oklch(0 0 0 / 0.7) 0%,
-            oklch(0 0 0 / 0.4) 50%,
+            oklch(0 0 0 / 0.8) 0%,
+            oklch(0 0 0 / 0.5) 50%,
             oklch(0 0 0 / 0) 100%);
     color: white;
     z-index: 10;
@@ -566,73 +807,101 @@ body {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 10px oklch(0 0 0 / 0.3);
+    text-shadow: 0 4px 12px oklch(0 0 0 / 0.5);
 }
 
 .slide-description {
     font-size: 1rem;
-    opacity: 0.9;
+    opacity: 0.95;
     max-width: 500px;
-    text-shadow: 0 1px 5px oklch(0 0 0 / 0.3);
+    text-shadow: 0 2px 6px oklch(0 0 0 / 0.5);
 }
 
-/* Swiper Navigation Arrows */
+/* Swiper Navigation Arrows (Tactile) */
 .swiper-button-prev,
 .swiper-button-next {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     background-color: oklch(1 0 0 / 0.9);
     border-radius: 50%;
-    box-shadow: var(--shadow-md);
-    transition: background-color var(--transition-fast), opacity var(--transition-fast);
-    -webkit-tap-highlight-color: transparent;
+
+    /* NO BORDER */
+    border: none;
+
+    /* Tactile */
+    box-shadow: var(--shadow-tactile);
+
+    transition: all var(--transition-fast);
     outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0);
 }
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 700;
+    color: var(--foreground);
+    text-shadow: 0 1px 0 white;
+}
+
+.dark .swiper-button-prev::after,
+.dark .swiper-button-next::after {
     color: black;
 }
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-    background-color: oklch(0.95 0.01 238.47);
-    opacity: 0.9;
+    background-color: white;
+    /* Lift */
+    transform: translateY(-2px) scale(1.05);
+    box-shadow:
+        var(--btn-bevel),
+        0 4px 0 0 oklch(0 0 0 / 0.15),
+        0 12px 20px -4px oklch(0 0 0 / 0.2);
 }
 
-.swiper-button-prev:focus-visible,
-.swiper-button-next:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
+.swiper-button-prev:active,
+.swiper-button-next:active {
+    /* Press 2px */
+    transform: translateY(2px) scale(0.95);
+    /* Shadow Collapse */
+    box-shadow:
+        inset 0 2px 4px 0 oklch(0 0 0 / 0.1),
+        0 0 0 0 oklch(0 0 0 / 0),
+        0 1px 1px 0 oklch(0 0 0 / 0.1);
 }
 
 .swiper-button-prev {
-    left: 1.5rem;
+    left: 2rem;
 }
 
 .swiper-button-next {
-    right: 1.5rem;
+    right: 2rem;
 }
 
-/* Swiper Pagination */
+/* Pagination */
 .swiper-pagination {
-    bottom: 1.5rem !important;
+    bottom: 2rem !important;
 }
 
 .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    background-color: oklch(1 0 0 / 0.5);
-    opacity: 1;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    opacity: 0.6;
+    box-shadow: 0 2px 4px oklch(0 0 0 / 0.3);
     transition: all var(--transition-fast);
 }
 
 .swiper-pagination-bullet-active {
     background-color: var(--primary);
-    width: 30px;
+    width: 32px;
     border-radius: var(--radius-full);
+    opacity: 1;
+    box-shadow: 0 0 0 2px white, 0 2px 4px oklch(0 0 0 / 0.3);
 }
 
 /* ============================================
@@ -641,9 +910,12 @@ body {
 .footer {
     padding: 2rem 0;
     text-align: center;
-    border-top: 1px solid var(--border);
+    /* No Border - Separation by Shadow */
+    border: none;
+    box-shadow: inset 0 4px 6px -4px oklch(0 0 0 / 0.05);
     color: var(--muted-foreground);
     font-size: 0.875rem;
+    background-color: var(--card);
 }
 
 /* ============================================
@@ -689,18 +961,8 @@ body {
         height: 40px;
         padding-left: 0.75rem;
         padding-right: 0.25rem;
-        overflow: hidden;
-        /* Fade edges for smooth text clipping */
-        -webkit-mask-image: linear-gradient(to right,
-                transparent 0%,
-                black 5%,
-                black 85%,
-                transparent 100%);
-        mask-image: linear-gradient(to right,
-                transparent 0%,
-                black 5%,
-                black 85%,
-                transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 85%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, black 5%, black 85%, transparent 100%);
     }
 
     .search-input {
@@ -717,7 +979,6 @@ body {
     .search-placeholder {
         left: 0.75rem;
         font-size: 0.8125rem;
-        white-space: nowrap;
         animation: slideTextContained 6s ease-in-out infinite;
     }
 
@@ -745,7 +1006,7 @@ body {
 
     .swiper-button-prev::after,
     .swiper-button-next::after {
-        font-size: 0.875rem;
+        font-size: 1rem;
     }
 
     .swiper-button-prev {
@@ -772,15 +1033,18 @@ body {
 }
 
 /* ============================================
-   Smooth Theme Transition
+   Smooth Theme Transition (Color Only)
    ============================================ */
 body,
 .header,
 .search-bar,
 .theme-toggle,
-.footer {
+.footer,
+.btn,
+.search-btn {
     transition:
         background-color var(--transition-base),
-        border-color var(--transition-base),
-        color var(--transition-base);
+        color var(--transition-base),
+        box-shadow var(--transition-base),
+        transform var(--transition-base);
 }
