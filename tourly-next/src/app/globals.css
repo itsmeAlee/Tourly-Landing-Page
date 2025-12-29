@@ -1,3 +1,9 @@
+/* Swiper CSS Imports */
+@import 'swiper/css';
+@import 'swiper/css/parallax';
+@import 'swiper/css/pagination';
+@import 'swiper/css/navigation';
+
 /* ============================================
    TOURLY - Premium Tourism Landing Page
    Design System: Dimensional 2D (Strictly Borderless)
@@ -280,8 +286,8 @@ body {
     text-decoration: none;
     border: none;
     transition: opacity var(--transition-fast);
-    margin-left: -0.5rem;
-    /* Push logo closer to far-left edge */
+    margin-left: -1.5rem;
+    /* Push logo to far-left edge */
 }
 
 .logo:hover {
@@ -290,8 +296,8 @@ body {
 
 /* Image Logo Styling */
 .logo-img {
-    height: 58px;
-    /* Increased by 3px */
+    height: 55px;
+    /* Set to 55px */
     width: auto;
     display: block;
     border: none;
@@ -314,11 +320,20 @@ body {
     padding: 0.5rem 0.75rem;
     border-radius: var(--radius-md);
     background-color: transparent;
-    transition: color var(--transition-fast), background-color var(--transition-fast);
+    transition: color 0s;
+    /* Immediate revert */
 }
 
-/* Hover Effect - Matches Social Icons (no shifting) */
-.nav-link:hover {
+/* Hover Effect - Matches Social Icons */
+@media (hover: hover) {
+    .nav-link:hover {
+        color: var(--primary);
+        background-color: transparent;
+        transition: color var(--transition-fast);
+    }
+}
+
+.nav-link:active {
     color: var(--primary);
     background-color: var(--secondary);
 }
@@ -345,12 +360,16 @@ body {
     border: none;
     /* STRICTLY NO BORDER */
     box-shadow: var(--shadow-tactile);
-    transition: all var(--transition-fast);
+    transition: box-shadow var(--transition-fast), color 0s;
+    /* Immediate revert for color */
 }
 
-.theme-toggle:hover {
-    color: var(--primary);
-    background-color: var(--secondary);
+@media (hover: hover) {
+    .theme-toggle:hover {
+        color: var(--primary);
+        background-color: var(--secondary);
+        transition: color var(--transition-fast);
+    }
 }
 
 .theme-toggle:active {
@@ -994,10 +1013,19 @@ body {
     text-decoration: none;
     border: none;
     background-color: transparent;
-    transition: color var(--transition-fast), background-color var(--transition-fast);
+    transition: color 0s;
+    /* Immediate revert */
 }
 
-.social-link:hover {
+@media (hover: hover) {
+    .social-link:hover {
+        color: var(--primary);
+        background-color: transparent;
+        transition: color var(--transition-fast);
+    }
+}
+
+.social-link:active {
     color: var(--primary);
     background-color: var(--secondary);
 }
