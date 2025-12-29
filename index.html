@@ -24,16 +24,15 @@
     <!-- Navigation -->
     <header class="header">
         <div class="container header-container">
-            <a href="#" class="logo">Tourly</a>
-
-            <nav class="nav">
-                <a href="#destinations" class="nav-link">Destinations</a>
-                <a href="#itineraries" class="nav-link">Itineraries</a>
-                <a href="#reviews" class="nav-link">Reviews</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </nav>
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Tourly" class="logo-img">
+            </a>
 
             <div class="header-actions">
+                <nav class="nav">
+                    <a href="#destinations" class="nav-link">Destinations</a>
+                    <a href="#footer" class="nav-link">About us</a>
+                </nav>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -54,7 +53,6 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
-                <a href="#app" class="btn btn-primary">Get the App</a>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
                     <span></span>
                     <span></span>
@@ -63,34 +61,39 @@
             </div>
         </div>
 
-        <!-- Mobile Navigation -->
         <nav class="mobile-nav" id="mobileNav">
             <a href="#destinations" class="nav-link">Destinations</a>
-            <a href="#itineraries" class="nav-link">Itineraries</a>
-            <a href="#reviews" class="nav-link">Reviews</a>
-            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#footer" class="nav-link">About us</a>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1 class="hero-title">Your next adventure<br>starts right here</h1>
-            <p class="hero-subtitle">Discover tailored trips that fit your budget and style, with 24/7 support.</p>
+            <h1 class="hero-title">Your next <span class="text-primary">adventure</span><br>starts right here</h1>
+            <p class="hero-subtitle">Plan, book, and explore Gilgit-Baltistan—powered by smart travel tools.</p>
 
-            <!-- Search Bar -->
-            <div class="search-bar">
-                <div class="search-slide-window">
-                    <span class="search-placeholder">Where do you want to go?</span>
-                    <input type="text" class="search-input" aria-label="Search destination">
-                </div>
-                <button class="search-btn" aria-label="Search">
+            <!-- Hero Action Buttons -->
+            <div class="hero-actions">
+                <a href="#app" class="btn btn-action">
+                    <!-- Smartphone Icon (Lucide-style) -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                        <line x1="12" y1="18" x2="12.01" y2="18"></line>
                     </svg>
-                </button>
+                    <span>Start With App</span>
+                </a>
+                <a href="#web" class="btn btn-action">
+                    <!-- Monitor Icon (Lucide-style) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                    <span>Start With Web</span>
+                </a>
             </div>
         </div>
     </section>
@@ -197,9 +200,43 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Tourly. Discover the beauty of Gilgit-Baltistan.</p>
+    <footer class="footer" id="footer">
+        <div class="container footer-container">
+            <div class="footer-left">
+                <p class="footer-copyright">&copy; 2025 Tourly. All rights reserved.</p>
+            </div>
+            <div class="footer-center">
+                <div class="footer-social">
+                    <!-- Instagram -->
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <!-- Twitter/X -->
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
+                            </path>
+                        </svg>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <a href="#privacy" class="footer-link">Privacy Policy</a>
+            </div>
         </div>
     </footer>
 
