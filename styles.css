@@ -1,15 +1,37 @@
 /* ============================================
    TOURLY - Premium Tourism Landing Page
-   Design System: Dimensional 2D (Borderless & Tactile)
+   Design System: Dimensional 2D (Strictly Borderless)
    ============================================ */
 
-/* CSS Reset & Base */
+/* CSS Reset & Base - COMPREHENSIVE BORDER REMOVAL */
 *,
 *::before,
 *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+/* SVG & Icon Reset - Force currentColor and remove all strokes */
+svg,
+svg *,
+img {
+    border: none !important;
+    outline: none !important;
+}
+
+/* Override SVG stroke to currentColor - prevents pink/magenta fallbacks */
+svg path,
+svg circle,
+svg rect,
+svg line,
+svg polyline,
+svg polygon,
+svg ellipse {
+    stroke: currentColor !important;
+    vector-effect: non-scaling-stroke;
 }
 
 /* Disable square tap highlight */
@@ -53,7 +75,6 @@ input,
     */
 
     /* Technique: Double Shadow (Definition + Elevation) */
-    /* Sharp shadow defines the edge, Soft shadow gives height */
 
     /* Low Elevation (Cards/Elements) */
     --shadow-floating-sm:
@@ -72,24 +93,22 @@ input,
         0 1px 3px 0 oklch(0 0 0 / 0.1),
         0 12px 24px -6px oklch(0 0 0 / 0.08);
 
-    /* TACTILE BUTTON SYSTEM */
-    /* Top Bevel: Simulates light hitting the top edge (Inset Shadow) */
-    /* Side Shadow: Simulates the physical thickness of the button (Bottom Offset) */
-    /* Drop Shadow: Simulates the button sitting on the page */
-
-    --btn-bevel: inset 0 1.5px 0 0 oklch(1 1 1 / 0.6);
-    --btn-thickness: 0 2px 0 0 oklch(0 0 0 / 0.12);
-    /* The "Side" */
-    --btn-drop: 0 4px 6px -1px oklch(0 0 0 / 0.1);
+    /* TACTILE BUTTON SYSTEM - 2D DEPTH */
+    --btn-bevel: inset 0 1.5px 0 0 oklch(1 0 0 / 0.4);
+    --btn-thickness: 0 2px 0 0 oklch(0 0 0 / 0.1);
+    --btn-drop: 0 4px 8px -2px oklch(0 0 0 / 0.08);
 
     --shadow-tactile: var(--btn-bevel), var(--btn-thickness), var(--btn-drop);
 
-    /* Recessed Inputs (Search Bar) */
+    /* Recessed Inputs (Search Bar) - Pure Shadow, No Border */
     --shadow-recessed:
+        inset 0 1.5px 0 0 oklch(1 0 0 / 0.4),
         inset 0 2px 4px 0 oklch(0 0 0 / 0.05),
-        /* Inner Shadow */
-        0 1px 0 0 oklch(1 1 1 / 1);
+        0 1px 0 0 oklch(1 0 0 / 0.8);
     /* Bottom Lip Highlight */
+
+    /* Separator Shadow (Replaces Border Bottom) */
+    --shadow-separator: 0 1px 0 0 oklch(0 0 0 / 0.05);
 
     /* Typography */
     --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -120,7 +139,7 @@ input,
     --card: oklch(0.23 0.02 271.67);
     --card-foreground: oklch(0.92 0.01 238.47);
     --primary: oklch(0.71 0.15 239.15);
-    --primary-foreground: oklch(1 1 1);
+    --primary-foreground: oklch(1 0 0);
     --secondary: oklch(0.30 0.03 270.91);
     --secondary-foreground: oklch(0.92 0.01 238.47);
     --muted: oklch(0.25 0.03 270.91);
@@ -131,8 +150,6 @@ input,
     --ring: oklch(0.66 0.13 227.70);
 
     /* Dimensional System (Dark Mode) */
-    /* Deeper, starker shadows to define edges in low light */
-
     --shadow-floating-sm:
         0 1px 2px 0 oklch(0 0 0 / 0.5),
         0 4px 8px -2px oklch(0 0 0 / 0.3);
@@ -145,33 +162,42 @@ input,
         0 1px 3px 0 oklch(0 0 0 / 0.7),
         0 12px 24px -6px oklch(0 0 0 / 0.5);
 
-    /* Tactile Buttons Dark */
-    --btn-bevel: inset 0 1px 0 0 oklch(1 1 1 / 0.15);
-    /* Subtle rim light */
-    --btn-thickness: 0 2px 0 0 oklch(0 0 0 / 0.5);
-    /* Dark side */
+    /* Tactile Buttons Dark - 2D DEPTH */
+    --btn-bevel: inset 0 1.5px 0 0 oklch(1 0 0 / 0.15);
+    --btn-thickness: 0 2px 0 0 oklch(0 0 0 / 0.4);
     --btn-drop: 0 4px 8px -1px oklch(0 0 0 / 0.5);
 
     --shadow-tactile: var(--btn-bevel), var(--btn-thickness), var(--btn-drop);
 
-    /* Recessed Inputs Dark */
+    /* Recessed Inputs Dark - 2D DEPTH */
     --shadow-recessed:
+        inset 0 1.5px 0 0 oklch(1 0 0 / 0.1),
         inset 0 2px 4px 0 oklch(0 0 0 / 0.5),
-        0 1px 0 0 oklch(1 1 1 / 0.08);
+        0 1px 0 0 oklch(1 0 0 / 0.05);
+
+    --shadow-separator: 0 1px 0 0 oklch(1 0 0 / 0.1);
 }
 
 /* ============================================
    Animations
    ============================================ */
 
-/* Gloss Shimmer Animation - Moving Light */
-@keyframes gloss-shimmer {
-    0% {
-        background-position: 200% 0;
+/* glossSweep Animation - Diagonal light beam every 5 seconds */
+@keyframes glossSweep {
+
+    0%,
+    80% {
+        transform: translateX(-100%) rotate(0deg);
+        opacity: 0;
+    }
+
+    85% {
+        opacity: 1;
     }
 
     100% {
-        background-position: -200% 0;
+        transform: translateX(100%) rotate(0deg);
+        opacity: 0;
     }
 }
 
@@ -235,8 +261,8 @@ body {
     top: 0;
     z-index: 100;
     background-color: var(--background);
-    /* No Border - Separation by Float */
     border: none;
+    /* STRICTLY NO BORDER */
     box-shadow: var(--shadow-floating-md);
     transition: all var(--transition-base);
 }
@@ -275,6 +301,7 @@ body {
     text-decoration: none;
     transition: color var(--transition-fast);
     position: relative;
+    border: none;
 }
 
 .nav-link::after {
@@ -302,7 +329,7 @@ body {
     gap: 1rem;
 }
 
-/* Theme Toggle Button (Tactile) */
+/* Theme Toggle Button */
 .theme-toggle {
     display: flex;
     align-items: center;
@@ -314,37 +341,22 @@ body {
     cursor: pointer;
     color: var(--foreground);
     outline: none;
-
-    /* NO BORDER */
     border: none;
-
-    /* Tactile Attributes */
+    /* STRICTLY NO BORDER */
     box-shadow: var(--shadow-tactile);
     transition: all var(--transition-fast);
-    transform: translateY(0);
 }
 
 .theme-toggle:hover {
     filter: brightness(1.05);
     background-color: var(--card);
-    /* Slight color shift */
 }
 
 .theme-toggle:active {
-    /* Press Effect */
-    transform: translateY(2px);
-
-    /* Collapse the "Thickness" shadow */
-    box-shadow:
-        var(--btn-bevel),
-        0 0 0 0 oklch(0 0 0 / 0),
-        /* Thickness gone */
-        0 1px 2px 0 oklch(0 0 0 / 0.1);
-    /* Drop reduced */
+    filter: brightness(0.95);
 }
 
 .theme-toggle:focus-visible {
-    /* Focus relies on ring, no border */
     box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
 }
 
@@ -375,68 +387,41 @@ body {
     text-decoration: none;
     border-radius: var(--radius-md);
     cursor: pointer;
-
-    /* NO BORDER */
     border: none;
-
-    /* Tactile Attributes */
+    /* STRICTLY NO BORDER */
     box-shadow: var(--shadow-tactile);
     transition: all var(--transition-fast);
     position: relative;
-    transform: translateY(0);
 }
 
 .btn-primary {
     background-color: var(--primary);
     color: white;
-    /* Masking for shimmer */
     overflow: hidden;
 }
 
-/* The Gloss Shimmer */
+/* The Gloss Sweep Effect */
 .btn-primary::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    /* Soft White Gradient */
-    background: linear-gradient(105deg,
-            transparent 40%,
-            oklch(1 0 0 / 0.2) 50%,
-            transparent 60%);
-    background-size: 200% 100%;
-    animation: gloss-shimmer 4s infinite linear;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(110deg,
+            transparent 25%,
+            oklch(1 0 0 / 0.3) 50%,
+            transparent 75%);
+    animation: glossSweep 5s infinite ease-in-out;
     pointer-events: none;
-    mix-blend-mode: overlay;
-    /* Blends nicely on both light/dark */
 }
 
 .btn-primary:hover {
     filter: brightness(1.1);
-    /* Slight Lift */
-    transform: translateY(-1px);
-    box-shadow:
-        var(--btn-bevel),
-        0 3px 0 0 oklch(0 0 0 / 0.15),
-        /* Thicker side */
-        0 8px 12px -2px oklch(0 0 0 / 0.15);
-    /* Higher drop */
 }
 
 .btn-primary:active {
-    /* Press Effect (2px) */
-    transform: translateY(2px);
-
-    /* Shadow Collapse */
-    box-shadow:
-        inset 0 2px 4px 0 oklch(0 0 0 / 0.1),
-        /* Inner shadow for depth when pressed */
-        0 0 0 0 oklch(0 0 0 / 0),
-        /* Thickness gone */
-        0 1px 1px 0 oklch(0 0 0 / 0.1);
-    /* Minimal drop */
+    filter: brightness(0.95);
 }
 
 .btn-primary:focus-visible {
@@ -454,6 +439,7 @@ body {
     height: 40px;
     background: none;
     border: none;
+    /* STRICTLY NO BORDER */
     cursor: pointer;
     gap: 5px;
     outline: none;
@@ -487,6 +473,7 @@ body {
     padding: 1rem var(--container-padding);
     background-color: var(--background);
     border: none;
+    /* STRICTLY NO BORDER */
     box-shadow: var(--shadow-floating-lg);
 }
 
@@ -496,12 +483,14 @@ body {
 
 .mobile-nav .nav-link {
     padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border);
-    /* kept internal separator */
+    border: none;
+    /* REMOVED BORDER */
+    box-shadow: var(--shadow-separator);
+    /* Shadow separator instead */
 }
 
 .mobile-nav .nav-link:last-child {
-    border-bottom: none;
+    box-shadow: none;
 }
 
 /* ============================================
@@ -520,7 +509,6 @@ body {
     color: var(--foreground);
     margin-bottom: 1.25rem;
     text-shadow: 0 2px 4px oklch(0 0 0 / 0.05);
-    /* Text dimension */
 }
 
 .hero-subtitle {
@@ -542,40 +530,35 @@ body {
     border-radius: var(--radius-full);
     padding: 0.5rem;
     overflow: hidden;
-
-    /* NO BORDER */
     border: none;
-
-    /* Recessed Effect defined by shadow */
+    /* STRICTLY NO BORDER */
     box-shadow: var(--shadow-recessed);
     transition: all var(--transition-base);
 }
 
-/* Shimmer for Search Bar */
+/* Shimmer for Search Bar - glossSweep */
 .search-bar::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(105deg,
-            transparent 40%,
-            oklch(1 0 0 / 0.2) 50%,
-            /* White gloss */
-            transparent 60%);
-    background-size: 200% 100%;
-    animation: gloss-shimmer 6s infinite ease-in-out;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(110deg,
+            transparent 25%,
+            oklch(1 0 0 / 0.25) 50%,
+            transparent 75%);
+    animation: glossSweep 5s infinite ease-in-out;
+    animation-delay: 0.5s;
     pointer-events: none;
-    mix-blend-mode: soft-light;
     z-index: 5;
+    border-radius: inherit;
 }
 
 .search-bar:focus-within {
     box-shadow:
         var(--shadow-recessed),
         0 0 0 3px oklch(0.71 0.15 239.15 / 0.2);
-    /* Focus ring via shadow */
 }
 
 /* Slide Window */
@@ -644,53 +627,37 @@ body {
     position: relative;
     outline: none;
     overflow: hidden;
-
-    /* NO BORDER */
     border: none;
-
-    /* Tactile Attributes */
+    /* STRICTLY NO BORDER */
     box-shadow: var(--shadow-tactile);
     transition: all var(--transition-fast);
-    transform: translateY(0);
 }
 
-/* Shimmer for Search Button */
+/* Shimmer for Search Button - glossSweep */
 .search-btn::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(105deg,
-            transparent 40%,
-            oklch(1 0 0 / 0.2) 50%,
-            transparent 60%);
-    background-size: 200% 100%;
-    animation: gloss-shimmer 4s infinite linear;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(110deg,
+            transparent 25%,
+            oklch(1 0 0 / 0.3) 50%,
+            transparent 75%);
+    animation: glossSweep 5s infinite ease-in-out;
+    animation-delay: 1s;
     pointer-events: none;
-    mix-blend-mode: overlay;
+    border-radius: inherit;
 }
 
 .search-btn:hover {
     background-color: oklch(0.65 0.15 239.15);
-    /* Lift */
-    transform: translateY(-1px);
-    box-shadow:
-        var(--btn-bevel),
-        0 3px 0 0 oklch(0 0 0 / 0.15),
-        0 8px 12px -2px oklch(0 0 0 / 0.15);
 }
 
 .search-btn:active {
-    /* Press 2px */
-    transform: translateY(2px);
     background-color: oklch(0.60 0.15 239.15);
-    /* Shadow Collapse */
-    box-shadow:
-        inset 0 2px 4px 0 oklch(0 0 0 / 0.1),
-        0 0 0 0 oklch(0 0 0 / 0),
-        0 1px 1px 0 oklch(0 0 0 / 0.1);
+    filter: brightness(0.95);
 }
 
 .search-btn:focus-visible {
@@ -717,33 +684,27 @@ body {
     position: relative;
     border-radius: var(--radius-xl);
     overflow: hidden;
-
-    /* NO BORDER */
     border: none;
-
-    /* Double Shadow Floating Effect */
+    /* STRICTLY NO BORDER */
     box-shadow: var(--shadow-floating-lg);
     background-color: var(--card);
-    /* Ensure no transparency leak */
 }
 
-/* Shimmer for Slider */
+/* Shimmer for Slider - glossSweep */
 .slider-container::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(105deg,
-            transparent 40%,
-            oklch(1 0 0 / 0.1) 50%,
-            /* Subtler on large area */
-            transparent 60%);
-    background-size: 200% 100%;
-    animation: gloss-shimmer 8s infinite ease-in-out;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(110deg,
+            transparent 25%,
+            oklch(1 0 0 / 0.15) 50%,
+            transparent 75%);
+    animation: glossSweep 5s infinite ease-in-out;
+    animation-delay: 1.5s;
     pointer-events: none;
-    mix-blend-mode: screen;
     z-index: 20;
     border-radius: var(--radius-xl);
 }
@@ -754,11 +715,9 @@ body {
     border-radius: var(--radius-xl);
     overflow: hidden;
     position: relative;
-    /* Clean cut for image */
     mask-image: linear-gradient(black, black);
     -webkit-mask-image: linear-gradient(black, black);
     border-radius: var(--radius-xl);
-    /* Enforce Clip */
 }
 
 .swiper-slide {
@@ -818,25 +777,10 @@ body {
 }
 
 /* Swiper Navigation Arrows (Tactile) */
+/* Navigation Arrows - HIDDEN (swipe gestures only) */
 .swiper-button-prev,
 .swiper-button-next {
-    width: 48px;
-    height: 48px;
-    background-color: oklch(1 0 0 / 0.9);
-    border-radius: 50%;
-
-    /* NO BORDER */
-    border: none;
-
-    /* Tactile */
-    box-shadow: var(--shadow-tactile);
-
-    transition: all var(--transition-fast);
-    outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: translateY(0);
+    display: none !important;
 }
 
 .swiper-button-prev::after,
@@ -855,23 +799,20 @@ body {
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
     background-color: white;
-    /* Lift */
     transform: translateY(-2px) scale(1.05);
     box-shadow:
         var(--btn-bevel),
-        0 4px 0 0 oklch(0 0 0 / 0.15),
-        0 12px 20px -4px oklch(0 0 0 / 0.2);
+        0 4px 0 0 oklch(0 0 0 / 0.12),
+        0 12px 24px -6px oklch(0 0 0 / 0.18);
 }
 
 .swiper-button-prev:active,
 .swiper-button-next:active {
-    /* Press 2px */
-    transform: translateY(2px) scale(0.95);
-    /* Shadow Collapse */
+    transform: translateY(1px) scale(0.98);
     box-shadow:
         inset 0 2px 4px 0 oklch(0 0 0 / 0.1),
-        0 0 0 0 oklch(0 0 0 / 0),
-        0 1px 1px 0 oklch(0 0 0 / 0.1);
+        0 1px 0 0 oklch(0 0 0 / 0.05),
+        0 2px 4px -1px oklch(0 0 0 / 0.1);
 }
 
 .swiper-button-prev {
@@ -901,7 +842,9 @@ body {
     width: 32px;
     border-radius: var(--radius-full);
     opacity: 1;
-    box-shadow: 0 0 0 2px white, 0 2px 4px oklch(0 0 0 / 0.3);
+    border: none !important;
+    outline: none !important;
+    box-shadow: 0 2px 4px oklch(0 0 0 / 0.3);
 }
 
 /* ============================================
@@ -910,8 +853,8 @@ body {
 .footer {
     padding: 2rem 0;
     text-align: center;
-    /* No Border - Separation by Shadow */
     border: none;
+    /* STRICTLY NO BORDER */
     box-shadow: inset 0 4px 6px -4px oklch(0 0 0 / 0.05);
     color: var(--muted-foreground);
     font-size: 0.875rem;
