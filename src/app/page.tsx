@@ -5,6 +5,11 @@ import Image from 'next/image';
 import Swiper from 'swiper';
 import { Parallax, Pagination, Navigation, Autoplay, Keyboard } from 'swiper/modules';
 
+import SwipeText from '../components/SwipeText';
+
+// Words to cycle through in the swipe animation
+const heroWords = ['adventure', 'expedition', 'discovery', 'escapade', 'journey'];
+
 // Destination slides data
 const destinations = [
     {
@@ -168,9 +173,9 @@ export default function LandingPage() {
 
             // Event handlers for Ken Burns effect
             on: {
-                init: function () {
+                init: function (swiper) {
                     // Ensure first slide has the animation
-                    const activeSlide = this.slides[this.activeIndex];
+                    const activeSlide = swiper.slides[swiper.activeIndex];
                     if (activeSlide) {
                         const img = activeSlide.querySelector('.slide-image') as HTMLElement;
                         if (img) {
@@ -178,18 +183,18 @@ export default function LandingPage() {
                         }
                     }
                 },
-                slideChangeTransitionStart: function () {
+                slideChangeTransitionStart: function (swiper) {
                     // Reset animation on all slides
-                    this.slides.forEach((slide) => {
+                    swiper.slides.forEach((slide: HTMLElement) => {
                         const img = slide.querySelector('.slide-image') as HTMLElement;
                         if (img) {
                             img.style.animation = 'none';
                         }
                     });
                 },
-                slideChangeTransitionEnd: function () {
+                slideChangeTransitionEnd: function (swiper) {
                     // Apply Ken Burns to active slide
-                    const activeSlide = this.slides[this.activeIndex];
+                    const activeSlide = swiper.slides[swiper.activeIndex];
                     if (activeSlide) {
                         const img = activeSlide.querySelector('.slide-image') as HTMLElement;
                         if (img) {
@@ -324,7 +329,7 @@ export default function LandingPage() {
             <section className="hero">
                 <div className="container">
                     <h1 className="hero-title">
-                        Your next <span className="text-primary">adventure</span>
+                        Your next <SwipeText words={heroWords} />
                         <br />
                         starts right here
                     </h1>
