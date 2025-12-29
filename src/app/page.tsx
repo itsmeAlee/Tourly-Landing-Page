@@ -4,11 +4,56 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import Swiper from 'swiper';
 import { Parallax, Pagination, Navigation, Autoplay, Keyboard } from 'swiper/modules';
+import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
+import { Bed, Compass, Sparkles, Activity, Smartphone, Monitor } from 'lucide-react';
 
 import SwipeText from '../components/SwipeText';
 
 // Words to cycle through in the swipe animation
 const heroWords = ['adventure', 'expedition', 'discovery', 'escapade', 'journey'];
+
+// Features Data
+const featuresData = [
+    {
+        icon: <Bed size={28} strokeWidth={1.5} />,
+        title: 'Hotels & Homestays',
+        description: 'Cozy retreats and luxury stays tailored to your budget.',
+    },
+    {
+        icon: <Compass size={28} strokeWidth={1.5} />,
+        title: 'Tours & Local Guides',
+        description: 'Explore hidden gems with experts who know the land best.',
+    },
+    {
+        icon: <Sparkles size={28} strokeWidth={1.5} />,
+        title: 'AI Trip Planner',
+        description: 'Instant, personalized itineraries powered by smart AI.',
+    },
+    {
+        icon: <Activity size={28} strokeWidth={1.5} />,
+        title: 'Live Road Status',
+        description: 'Real-time updates to keep your journey safe and smooth.',
+    },
+];
+
+// Testimonials Data
+const testimonialsData = [
+    {
+        name: 'Zeeshan Ahmed',
+        initials: 'ZA',
+        text: 'The Live Road Status saved our trip to Hunza! Truly a game changer.',
+    },
+    {
+        name: 'Amna Khan',
+        initials: 'AK',
+        text: 'Finding a homestay in Skardu was never this easy. The AI planner is brilliant.',
+    },
+    {
+        name: 'Bilal Shah',
+        initials: 'BS',
+        text: 'Highly recommend the local guides feature. We discovered hidden gems in Gilgit.',
+    },
+];
 
 // Destination slides data
 const destinations = [
@@ -265,6 +310,12 @@ export default function LandingPage() {
                             <a href="#destinations" className="nav-link">
                                 Destinations
                             </a>
+                            <a href="#features" className="nav-link">
+                                Features
+                            </a>
+                            <a href="#testimonials" className="nav-link">
+                                Testimonials
+                            </a>
                             <a href="#footer" className="nav-link">
                                 About us
                             </a>
@@ -319,6 +370,12 @@ export default function LandingPage() {
                     <a href="#destinations" className="nav-link">
                         Destinations
                     </a>
+                    <a href="#features" className="nav-link">
+                        Features
+                    </a>
+                    <a href="#testimonials" className="nav-link">
+                        Testimonials
+                    </a>
                     <a href="#footer" className="nav-link">
                         About us
                     </a>
@@ -329,9 +386,11 @@ export default function LandingPage() {
             <section className="hero">
                 <div className="container">
                     <h1 className="hero-title">
-                        Your next <SwipeText words={heroWords} />
-                        <br />
-                        starts right here
+                        <span className="hero-title-line">
+                            <span>Your next</span>
+                            <SwipeText words={heroWords} />
+                        </span>
+                        <span className="hero-second-line">starts right here</span>
                     </h1>
                     <p className="hero-subtitle">
                         Plan, book, and explore Gilgit-Baltistan—powered by smart travel tools.
@@ -340,40 +399,11 @@ export default function LandingPage() {
                     {/* Hero Action Buttons */}
                     <div className="hero-actions">
                         <a href="#app" className="btn btn-action">
-                            {/* Smartphone Icon (Lucide-style) */}
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
-                            </svg>
+                            <Smartphone size={32} strokeWidth={3.0} />
                             <span>Start With App</span>
                         </a>
                         <a href="#web" className="btn btn-action">
-                            {/* Monitor Icon (Lucide-style) */}
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                <line x1="8" y1="21" x2="16" y2="21"></line>
-                                <line x1="12" y1="17" x2="12" y2="21"></line>
-                            </svg>
+                            <Monitor size={32} strokeWidth={3.0} />
                             <span>Start With Web</span>
                         </a>
                     </div>
@@ -418,6 +448,63 @@ export default function LandingPage() {
                             <div className="swiper-pagination"></div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            {/* App Features Section */}
+            <section className="features" id="features">
+                <div className="container">
+                    <h2 className="section-title">Why Choose Tourly?</h2>
+                    <div className="features-grid">
+                        {featuresData.map((feature, index) => (
+                            <div key={index} className="feature-card">
+                                <div className="feature-icon-box">{feature.icon}</div>
+                                <h3 className="feature-title">{feature.title}</h3>
+                                <p className="hero-subtitle" style={{ fontSize: '0.9375rem', marginBottom: 0, maxWidth: '100%' }}>
+                                    {feature.description}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Testimonials Section */}
+            <section className="testimonials" id="testimonials">
+                <div className="container">
+                    <h2 className="section-title">What Travelers Say</h2>
+                    <SwiperReact
+                        modules={[Pagination]}
+                        spaceBetween={20}
+                        slidesPerView={1}
+                        centeredSlides={true}
+                        pagination={{ clickable: true }}
+                        className="testimonials-slider"
+                        breakpoints={{
+                            640: {
+                                slidesPerView: 2,
+                                centeredSlides: false,
+                                spaceBetween: 30,
+                            },
+                            1024: {
+                                slidesPerView: 3,
+                                centeredSlides: false,
+                                spaceBetween: 30,
+                            },
+                        }}
+                    >
+                        {testimonialsData.map((testimonial, index) => (
+                            <SwiperSlide key={index}>
+                                <div className="testimonial-card">
+                                    <p className="testimonial-text">"{testimonial.text}"</p>
+                                    <div className="testimonial-author">
+                                        <div className="author-avatar">{testimonial.initials}</div>
+                                        <span className="author-name">{testimonial.name}</span>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </SwiperReact>
                 </div>
             </section>
 
