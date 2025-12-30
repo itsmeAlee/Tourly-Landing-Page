@@ -18,13 +18,16 @@ export default function SwipeText({ words, interval = 3000 }: SwipeTextProps) {
         return () => clearInterval(timer);
     }, [words.length, interval]);
 
+    // Find the longest word to set minimum width
+    const longestWord = words.reduce((a, b) => a.length > b.length ? a : b, '');
+
     return (
-        <span className="swipe-text-container inline-flex relative h-[1.2em] overflow-hidden align-middle ml-[0.3em]" style={{ width: '10ch' }}>
-            <span className="relative w-full h-full flex items-center justify-start">
+        <span className="swipe-word-wrapper">
+            <span className="swipe-word-inner">
                 <AnimatePresence mode="popLayout" initial={false}>
                     <motion.span
                         key={words[index]}
-                        className="absolute left-0 text-primary font-bold"
+                        className="swipe-word"
                         initial={{ y: '100%', opacity: 0, filter: 'blur(5px)' }}
                         animate={{ y: '0%', opacity: 1, filter: 'blur(0px)' }}
                         exit={{ y: '-100%', opacity: 0, filter: 'blur(5px)' }}
@@ -33,14 +36,12 @@ export default function SwipeText({ words, interval = 3000 }: SwipeTextProps) {
                             opacity: { duration: 0.2 },
                             filter: { duration: 0.2 }
                         }}
-                        style={{
-                            lineHeight: 1,
-                            whiteSpace: 'nowrap'
-                        }}
                     >
                         {words[index]}
                     </motion.span>
                 </AnimatePresence>
+                {/* Hidden span for width calculation */}
+                <span className="swipe-word-sizer" aria-hidden="true">{longestWord}</span>
             </span>
         </span>
     );

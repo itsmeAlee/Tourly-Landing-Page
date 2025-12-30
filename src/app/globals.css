@@ -29,15 +29,17 @@ body {
     outline: none;
 }
 
-/* SVG & Icon Reset - Force currentColor and remove all strokes */
+/* SVG & Icon Reset - Remove borders only */
 svg,
-svg *,
 img {
     border: none !important;
     outline: none !important;
+}
+
+/* Fluid images only - NOT SVGs (fixes icon sizing) */
+img {
     max-width: 100%;
     height: auto;
-    /* Ensure fluid images */
 }
 
 /* Override SVG stroke to currentColor - prevents pink/magenta fallbacks */
@@ -547,48 +549,107 @@ body {
 /* ============================================
    Hero Section
    ============================================ */
-/* ============================================
-   Hero Section
-   ============================================ */
 .hero {
     padding: 4rem 0 2rem;
     text-align: center;
 }
 
-.hero-title {
-    font-size: clamp(2rem, 8vw, 4.5rem);
+/* Hero Wrapper - Centers the heading container */
+.hero-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Heading - Flex Column Centering */
+.main-heading {
+    /* Typography - Responsive */
+    font-size: clamp(1.8rem, 8vw, 4.5rem);
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: -0.03em;
     color: var(--foreground);
     margin-bottom: 1.25rem;
     text-shadow: 0 2px 4px oklch(0 0 0 / 0.05);
-    /* Flex alignment for centering everything */
+
+    /* Alignment: Flex column, centered */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100%;
+    text-align: center;
+
+    /* Responsive containment - 95vw for all devices */
+    max-width: 95vw;
 }
 
-/* First line container - keeps 'Your next [word]' together with gap */
-.hero-title-line {
+/* Line 1 - Flex Row with Exact 1ch Gap */
+.line-1 {
     display: flex;
-    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    column-gap: 0.4em;
-    /* Handles the space between 'Next' and word */
+    column-gap: 1ch;
+    /* EXACTLY one character width */
+    width: 100%;
     white-space: nowrap;
-    position: relative;
-    /* Removed padding hacks */
-    padding-left: 0;
+    /* Push left for long words */
 }
 
-/* Swipe text container styling - Reset margins */
-.swipe-text-container {
-    text-align: left;
-    margin: 0 !important;
+/* Remove all margins/paddings between elements */
+.line-1>span,
+.swipe-box {
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+/* Swipe Box - Container for animated word */
+.swipe-box {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Swipe Word Wrapper - Contains the animation viewport */
+.swipe-word-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 1.2em;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+/* Swipe Word Inner - For positioning */
+.swipe-word-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* Active Swipe Word */
+.swipe-word {
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 800;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+/* Hidden Sizer - Sets minimum width based on longest word */
+.swipe-word-sizer {
+    visibility: hidden;
+    white-space: nowrap;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* Line 2 (starts right here) */
+.line-2 {
+    display: block;
 }
 
 .hero-subtitle {
@@ -599,7 +660,7 @@ body {
 }
 
 /* ============================================
-   Hero Action Buttons
+   Hero Action Buttons - REBUILT FROM SCRATCH (User Spec: Task 2)
    ============================================ */
 
 /* Container - Responsive Flex Layout */
@@ -613,22 +674,27 @@ body {
     max-width: 500px;
 }
 
-/* Action Button - 2D Tactile Tile (No Borders) */
+/* Action Button - REBUILT (User Spec: Task 2) */
 .btn-action {
+    /* Layout: inline-flex, centered, 12px gap (User Spec) */
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
+
+    /* Padding: 14px 28px (User Spec) */
     padding: 14px 28px;
+
+    /* Typography */
     font-size: 1.125rem;
     font-weight: 700;
     text-decoration: none;
+
+    /* Appearance */
     border-radius: var(--radius-md);
     cursor: pointer;
     position: relative;
     overflow: hidden;
-
-    /* NO BORDER - Dimensional 2D */
     border: none;
 
     /* Theme-aware colors */
@@ -658,7 +724,7 @@ body {
     z-index: 0;
 }
 
-/* Hover - Brightness increase, no movement */
+/* Hover - Brightness increase */
 .btn-action:hover {
     filter: brightness(1.1);
 }
@@ -680,26 +746,55 @@ body {
     outline: none;
 }
 
-/* Icon - Ultra Visible - ABOVE shimmer */
+/* ============================================
+   Button Icons - COMPLETE REBUILD
+   Size: 28px, Stroke: 2.5, Color: white
+   ============================================ */
 .btn-action svg {
+    /* CRITICAL: Revert to browser defaults first */
+    all: revert;
+
+    /* Explicit sizing - 28px */
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    max-width: none;
+
+    /* Layout */
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: middle;
+
+    /* Positioning above shimmer */
     position: relative;
     z-index: 2;
-    /* Strong stacking */
-    flex-shrink: 0;
-    width: 32px !important;
-    height: 32px !important;
-    stroke: white !important;
-    /* Force high contrast */
-    stroke-width: 3px !important;
-    display: block;
+
+    /* High-contrast white stroke */
+    stroke: white;
+    stroke-width: 2.5;
+    fill: none;
+    color: white;
+
+    /* Ensure visibility */
+    overflow: visible;
+    opacity: 1;
+    visibility: visible;
 }
 
-.btn-action svg * {
-    vector-effect: unset !important;
-    stroke: inherit !important;
+/* SVG paths/shapes inherit from parent */
+.btn-action svg path,
+.btn-action svg rect,
+.btn-action svg circle,
+.btn-action svg line,
+.btn-action svg polyline {
+    stroke: inherit;
+    stroke-width: inherit;
+    fill: none;
+    vector-effect: non-scaling-stroke;
 }
 
-/* Text - ABOVE shimmer */
+/* Text - Above shimmer */
 .btn-action span {
     position: relative;
     z-index: 2;
@@ -883,9 +978,11 @@ body {
             oklch(0.85 0.12 239.15) 20%,
             transparent 30%,
             transparent 100%) border-box;
-    border: 1px solid transparent;
+    /* Border thickness: 2px for consistency with feature/testimonial cards */
+    border: 2px solid transparent;
     box-shadow: var(--shadow-floating-lg);
-    animation: spin-border 6s linear infinite;
+    /* Animation speed: 5s to match feature and testimonial cards */
+    animation: spin-border 5s linear infinite;
 }
 
 /* Shimmer for Slider - glossSweep */
@@ -1363,22 +1460,18 @@ body {
         padding: 3rem 0;
     }
 
-    .hero-title {
-        font-size: clamp(2rem, 6vw, 2.5rem);
+    /* Hero Heading Mobile - Use new class names */
+    .hero-heading {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
         /* Smaller max size on mobile */
     }
 
-    .hero-title-line {
+    .line-one {
         display: flex;
         /* Match desktop */
         flex-wrap: nowrap;
         white-space: nowrap;
-    }
-
-    .swipe-text-container {
-        width: 8.5ch !important;
-        margin: 0 !important;
-        /* Reset margin, rely on column-gap */
+        column-gap: 0.5ch;
     }
 
     .hero-subtitle {

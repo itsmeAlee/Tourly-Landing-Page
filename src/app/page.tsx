@@ -385,13 +385,17 @@ export default function LandingPage() {
             {/* Hero Section */}
             <section className="hero">
                 <div className="container">
-                    <h1 className="hero-title">
-                        <span className="hero-title-line">
-                            <span>Your next</span>
-                            <SwipeText words={heroWords} />
-                        </span>
-                        <span className="hero-second-line">starts right here</span>
-                    </h1>
+                    <div className="hero-wrapper">
+                        <h1 className="main-heading">
+                            <div className="line-1">
+                                <span>Your next</span>
+                                <div className="swipe-box">
+                                    <SwipeText words={heroWords} />
+                                </div>
+                            </div>
+                            <div className="line-2">starts right here</div>
+                        </h1>
+                    </div>
                     <p className="hero-subtitle">
                         Plan, book, and explore Gilgit-Baltistan—powered by smart travel tools.
                     </p>
@@ -399,11 +403,11 @@ export default function LandingPage() {
                     {/* Hero Action Buttons */}
                     <div className="hero-actions">
                         <a href="#app" className="btn btn-action">
-                            <Smartphone size={32} strokeWidth={3.0} />
+                            <Smartphone size={28} strokeWidth={2.5} color="white" />
                             <span>Start With App</span>
                         </a>
                         <a href="#web" className="btn btn-action">
-                            <Monitor size={32} strokeWidth={3.0} />
+                            <Monitor size={28} strokeWidth={2.5} color="white" />
                             <span>Start With Web</span>
                         </a>
                     </div>
