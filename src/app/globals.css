@@ -1416,6 +1416,13 @@ body {
     color: var(--foreground);
 }
 
+.feature-description {
+    font-size: 0.9375rem;
+    color: var(--muted-foreground);
+    max-width: 100%;
+    margin: 0;
+}
+
 /* ============================================
    Testimonials Section
    ============================================ */
