@@ -103,3 +103,74 @@ import { SectionTitle, FeatureCard, TestimonialCard, SocialLink, ThemeToggle } f
 1. **glossSweep** - Diagonal light sweep on buttons (every 5s)
 2. **kenBurns** - Subtle zoom on slider images
 3. **spin-border** - Rotating gradient border on cards
+
+## Mobile Interaction Rules
+
+> **CRITICAL**: ALL interactive elements MUST use `:focus-visible` for focus states to prevent sticky tap effects on mobile. Avoid using the `:hover` state for mobile-specific styles, as it persists after a touch event.
+
+### Required Properties for All Interactive Elements
+
+| Property | Value | Purpose |
+|----------|-------|---------|
+| `-webkit-tap-highlight-color` | `transparent` | Removes default tap highlight |
+| `touch-action` | `manipulation` | Prevents browser hover simulation on touch |
+
+### Focus State Guidelines
+
+| Selector | Use Case | Notes |
+|----------|----------|-------|
+| `:focus` | ❌ NEVER use | Causes sticky tap on mobile |
+| `:focus-visible` | ✅ Keyboard only | Shows ring for keyboard users only |
+| `:active` | ✅ Tap feedback | Reverts immediately on touchend |
+| `:hover` | ⚠️ Wrap in `@media (hover: hover)` | Only for true hover devices |
+
+### Example: Correct Interactive Element
+
+```css
+.my-button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: color 0s; /* Immediate revert */
+}
+
+/* Hover only on true hover devices */
+@media (hover: hover) {
+    .my-button:hover {
+        color: var(--primary);
+        transition: color var(--transition-fast);
+    }
+}
+
+/* Tap feedback - reverts immediately */
+.my-button:active {
+    filter: brightness(0.95);
+}
+
+/* Keyboard focus only - uses box-shadow for border-radius support */
+.my-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+}
+```
+
+### Zero Motion on Click
+
+All buttons must have **NO scaling or shifting** when clicked:
+
+```css
+.button:active {
+    transform: none !important; /* Static - no motion */
+    filter: brightness(0.95); /* Subtle brightness change only */
+}
+```
+
+### Rounded Clipping
+
+For cards with `border-radius`, ensure tap highlights respect corners:
+
+```css
+.card {
+    overflow: hidden;
+    border-radius: inherit;
+}
+```

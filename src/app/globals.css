@@ -54,17 +54,32 @@ svg ellipse {
     vector-effect: non-scaling-stroke;
 }
 
-/* Disable square tap highlight */
+/* ============================================
+   MOBILE INTERACTION FIX
+   - Disable square tap highlight
+   - touch-action: manipulation prevents sticky hover simulation
+   - All interactive elements use :focus-visible, NOT :focus
+   ============================================ */
 button,
 a,
 input,
 [role="button"],
+.btn,
+.btn-action,
+.btn-primary,
 .theme-toggle,
 .mobile-menu-toggle,
 .search-btn,
+.nav-link,
+.social-link,
+.footer-link,
 .swiper-button-prev,
-.swiper-button-next {
+.swiper-button-next,
+.swiper-pagination-bullet,
+.feature-card,
+.testimonial-card {
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 /* ============================================
@@ -154,7 +169,9 @@ input,
 
 /* ============================================
    GLOBAL STATIC CLICK SYSTEM
-   No motion/transform on click - buttons stay perfectly still
+   - No motion/transform on click - buttons stay perfectly still
+   - :active states revert IMMEDIATELY on touchend/mouseup
+   - :focus-visible for keyboard only (no sticky tap effects)
    ============================================ */
 
 /* Universal clickable elements - Smooth color transitions only (NO transform) */
@@ -167,6 +184,7 @@ a,
 .theme-toggle,
 .nav-link,
 .social-link,
+.footer-link,
 .search-btn,
 .feature-card,
 .testimonial-card,
@@ -174,12 +192,15 @@ a,
 .swiper-button-prev,
 .swiper-button-next,
 .swiper-pagination-bullet {
+    /* Smooth color/filter transitions - NO transform transition */
     transition: filter var(--transition-instant),
         color var(--transition-instant),
-        background-color var(--transition-instant);
+        background-color var(--transition-instant),
+        box-shadow var(--transition-instant);
 }
 
 /* Active States - Static, no motion, only subtle brightness change */
+/* Color reverts IMMEDIATELY when touch/click ends */
 button:active,
 a:active,
 [role="button"]:active,
@@ -189,6 +210,7 @@ a:active,
 .theme-toggle:active,
 .nav-link:active,
 .social-link:active,
+.footer-link:active,
 .search-btn:active,
 .mobile-menu-toggle:active,
 .swiper-button-prev:active,
@@ -197,29 +219,53 @@ a:active,
 .feature-card:active,
 .testimonial-card:active {
     /* NO transform - button stays perfectly still */
-    transform: none;
+    transform: none !important;
+}
+
+/* CRITICAL: Remove :focus styles (causes sticky tap on mobile) */
+/* Only :focus-visible should show visual feedback (keyboard users only) */
+button:focus,
+a:focus,
+[role="button"]:focus,
+.btn:focus,
+.btn-action:focus,
+.btn-primary:focus,
+.theme-toggle:focus,
+.nav-link:focus,
+.social-link:focus,
+.footer-link:focus,
+.search-btn:focus,
+.feature-card:focus,
+.testimonial-card:focus {
+    outline: none;
 }
 
 /* Rounded Selection Fix - Ensure all clickable cards clip properly */
+/* border-radius: inherit ensures tap highlight matches container shape */
 .feature-card,
 .testimonial-card,
 .slider-container {
     overflow: hidden;
-    /* This ensures any highlight respects the rounded corners */
+    border-radius: inherit;
 }
 
-/* Fix focus-visible to use box-shadow (respects border-radius) instead of outline */
+/* :focus-visible - ONLY for keyboard navigation (not touch/mouse) */
+/* Uses box-shadow to respect border-radius */
 button:focus-visible,
 a:focus-visible,
 [role="button"]:focus-visible,
 .btn:focus-visible,
 .btn-action:focus-visible,
+.btn-primary:focus-visible,
 .theme-toggle:focus-visible,
 .nav-link:focus-visible,
 .social-link:focus-visible,
+.footer-link:focus-visible,
 .search-btn:focus-visible,
 .feature-card:focus-visible,
-.testimonial-card:focus-visible {
+.testimonial-card:focus-visible,
+.mobile-menu-toggle:focus-visible,
+.swiper-pagination-bullet:focus-visible {
     outline: none;
     box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
 }
@@ -1012,7 +1058,8 @@ body {
 }
 
 .search-btn:active {
-    transform: scale(0.96);
+    /* NO transform - static click */
+    transform: none;
     background-color: oklch(0.60 0.15 239.15);
     filter: brightness(0.95);
 }
@@ -1310,11 +1357,27 @@ body {
     font-size: 0.875rem;
     color: var(--muted-foreground);
     text-decoration: none;
-    transition: color var(--transition-fast);
+    border-radius: var(--radius-sm);
+    padding: 0.25rem 0.5rem;
+    /* Immediate revert on touch end */
+    transition: color 0s;
 }
 
-.footer-link:hover {
+/* Hover only for devices that support it (not touch) */
+@media (hover: hover) {
+    .footer-link:hover {
+        color: var(--primary);
+        transition: color var(--transition-fast);
+    }
+}
+
+.footer-link:active {
     color: var(--primary);
+}
+
+.footer-link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
 }
 
 /* Text Primary Color Utility */
@@ -1379,13 +1442,18 @@ body {
     animation: spin-border 4s linear infinite;
 }
 
-.feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-floating-lg);
+/* Hover only for devices that support it (not touch) */
+@media (hover: hover) {
+    .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-floating-lg);
+    }
 }
 
 .feature-card:active {
-    transform: scale(0.98) translateY(1px);
+    /* NO transform - static click */
+    transform: none !important;
+    filter: brightness(0.95);
     box-shadow: var(--shadow-floating-sm);
 }
 
@@ -1471,14 +1539,19 @@ body {
     z-index: 1;
 }
 
-.testimonial-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-floating-lg);
-    z-index: 2;
+/* Hover only for devices that support it (not touch) */
+@media (hover: hover) {
+    .testimonial-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-floating-lg);
+        z-index: 2;
+    }
 }
 
 .testimonial-card:active {
-    transform: scale(0.98) translateY(1px);
+    /* NO transform - static click */
+    transform: none !important;
+    filter: brightness(0.95);
     box-shadow: var(--shadow-floating-sm);
 }
 
