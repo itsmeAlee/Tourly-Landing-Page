@@ -1462,7 +1462,7 @@ body {
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
-    color: var(--foreground);
+    color: var(--primary);
     background-color: var(--secondary);
     border: none;
     transition: color var(--transition-fast), background-color var(--transition-fast);
