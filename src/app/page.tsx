@@ -389,7 +389,12 @@ export default function LandingPage() {
                                 <Smartphone size={28} strokeWidth={2.5} color="white" />
                                 <span>Start With App</span>
                             </a>
-                            <a href="#web" className="btn btn-action">
+                            <a
+                                href="https://north-stars.vercel.app/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-action"
+                            >
                                 <Monitor size={28} strokeWidth={2.5} color="white" />
                                 <span>Start With Web</span>
                             </a>

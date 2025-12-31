@@ -21,10 +21,16 @@ interface FeatureCardProps {
  */
 export default function FeatureCard({ icon, title, description }: FeatureCardProps) {
     return (
-        <div className="feature-card">
+        <a
+            href="https://north-stars.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="feature-card"
+            style={{ textDecoration: 'none' }}
+        >
             <div className="feature-icon-box">{icon}</div>
             <h3 className="feature-title">{title}</h3>
             <p className="feature-description">{description}</p>
-        </div>
+        </a>
     );
 }
