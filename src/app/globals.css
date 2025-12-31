@@ -76,8 +76,7 @@ input,
 .swiper-button-prev,
 .swiper-button-next,
 .swiper-pagination-bullet,
-.feature-card,
-.testimonial-card {
+.feature-card {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
 }
@@ -187,7 +186,6 @@ a,
 .footer-link,
 .search-btn,
 .feature-card,
-.testimonial-card,
 .mobile-menu-toggle,
 .swiper-button-prev,
 .swiper-button-next,
@@ -216,8 +214,7 @@ a:active,
 .swiper-button-prev:active,
 .swiper-button-next:active,
 .swiper-pagination-bullet:active,
-.feature-card:active,
-.testimonial-card:active {
+.feature-card:active {
     /* NO transform - button stays perfectly still */
     transform: none !important;
 }
@@ -235,15 +232,13 @@ a:focus,
 .social-link:focus,
 .footer-link:focus,
 .search-btn:focus,
-.feature-card:focus,
-.testimonial-card:focus {
+.feature-card:focus {
     outline: none;
 }
 
 /* Rounded Selection Fix - Ensure all clickable cards clip properly */
 /* border-radius: inherit ensures tap highlight matches container shape */
 .feature-card,
-.testimonial-card,
 .slider-container {
     overflow: hidden;
     border-radius: inherit;
@@ -263,7 +258,6 @@ a:focus-visible,
 .footer-link:focus-visible,
 .search-btn:focus-visible,
 .feature-card:focus-visible,
-.testimonial-card:focus-visible,
 .mobile-menu-toggle:focus-visible,
 .swiper-pagination-bullet:focus-visible {
     outline: none;
@@ -1453,8 +1447,10 @@ body {
 .feature-card:active {
     /* NO transform - static click */
     transform: none !important;
-    filter: brightness(0.95);
-    box-shadow: var(--shadow-floating-sm);
+    /* High-contrast tap feedback: inset primary shadow visible in both light and dark mode */
+    box-shadow:
+        inset 0 0 0 3px oklch(0.71 0.15 239.15 / 0.5),
+        var(--shadow-floating-sm);
 }
 
 /* Icon Box - Simple recessed look */
@@ -1472,9 +1468,12 @@ body {
     transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
-.feature-card:hover .feature-icon-box {
-    color: var(--primary);
-    background-color: oklch(0.71 0.15 239.15 / 0.1);
+/* Hover only for devices that support it (not touch) - prevents sticky tap state */
+@media (hover: hover) {
+    .feature-card:hover .feature-icon-box {
+        color: var(--primary);
+        background-color: oklch(0.71 0.15 239.15 / 0.1);
+    }
 }
 
 .feature-title {
@@ -1514,7 +1513,8 @@ body {
     height: auto;
 }
 
-/* Testimonial Card - Flat + Moving Gradient Border (matches Feature Cards) */
+/* Testimonial Card - Flat + Moving Gradient Border (matches Feature Cards)
+   STATIC: Non-clickable, tap/click interactions disabled. Only swipe gestures work. */
 .testimonial-card {
     height: 100%;
     position: relative;
@@ -1534,26 +1534,15 @@ body {
     flex-direction: column;
     /* Simple soft shadow - same as feature cards */
     box-shadow: var(--shadow-floating-md);
-    transition: transform var(--transition-instant), box-shadow var(--transition-instant);
     animation: spin-border 5s linear infinite reverse;
     z-index: 1;
+    /* STATIC CARD - no cursor change, no hover/active effects */
+    cursor: default;
+    /* pointer-events: auto allows swipe gestures but removes click interaction feedback */
+    user-select: text;
 }
 
-/* Hover only for devices that support it (not touch) */
-@media (hover: hover) {
-    .testimonial-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-floating-lg);
-        z-index: 2;
-    }
-}
-
-.testimonial-card:active {
-    /* NO transform - static click */
-    transform: none !important;
-    filter: brightness(0.95);
-    box-shadow: var(--shadow-floating-sm);
-}
+/* NO hover or active states - testimonial cards are purely display elements */
 
 .testimonial-text {
     font-size: 1rem;
